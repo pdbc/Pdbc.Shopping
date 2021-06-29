@@ -20,4 +20,4 @@ Every solution 'must' have some common classes that can be used freely throughou
 In this case I've added an ObjectBuilder interface/base class into to this project to provide the ability to fluently construct objects in my solution.  
 It provides better readability and allows to creation of TestObjectBuilders to create correctly filled in object in my tests.
 
-For more info about how I use the builder pattern see [Test Data Builder page](Pdbc.Shopping.Documentation\articles\data-builders.md)
+For more info about how I use the builder pattern see [Test Data Builder page](Pdbc.Shopping.Documentation/articles/data-builders.md)
