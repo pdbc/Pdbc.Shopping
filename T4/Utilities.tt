@@ -1,0 +1,273 @@
+<#@ template language="C#" debug="true" hostspecific="true" #>
+<#@ assembly name="System" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity" #>
+<#@ assembly name="EnvDTE" #>
+<#@ assembly name="VSLangProj" #>
+<#@ import namespace="EnvDTE" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Reflection" #>
+
+<#@ include file="$(SolutionDir)T4\GetClassesHelperMethods.tt" #>
+<#+ 
+
+
+    // 
+    public bool IsIncomingType(EnvDTE.CodeClass c) {
+        return c.Name.EndsWith("Request"); // || c.Name.EndsWith("Dto");
+    }
+
+    public bool IsOutgoingType(EnvDTE.CodeClass c) {
+        return c.Name.EndsWith("Response"); // || c.Name.EndsWith("Dto");
+    }
+
+    // Gets the project by project name
+    // Get the current project the T4 template is in.
+    public Assembly GetCurrentProjectReferenceAssemblyByName(string referenceAssemblyName) {
+        var serviceProvider = (IServiceProvider)this.Host;
+        var dte = (EnvDTE.DTE)serviceProvider.GetService(typeof(EnvDTE.DTE));
+        var projectItem = dte.Solution.FindProjectItem(this.Host.TemplateFile);
+        var project = projectItem.ContainingProject;
+
+        var vsProject = project.Object as VSLangProj.VSProject;
+      
+        foreach(var referenceObj in vsProject.References)
+        {
+            var reference = (VSLangProj.Reference)referenceObj;
+            if(reference.Name != referenceAssemblyName) continue;
+
+            var assembly = Assembly.LoadFile(reference.Path);
+            return assembly;
+        }
+
+        return null;
+    }
+
+    // Gets the project by project name
+    public EnvDTE.Project GetProjectByName(string projectName) {
+        var serviceProvider = (IServiceProvider)this.Host;
+        var dte = (EnvDTE.DTE)serviceProvider.GetService(typeof(EnvDTE.DTE));
+
+        var solution = dte.Solution;
+        var projects = GetAllProjectsRecursiveFromSolution(dte);
+        foreach (Project p in projects)
+        {
+            if (p != null) {
+                if (p.Name == projectName){
+                    return p;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public static IEnumerable<EnvDTE.Project> GetAllProjectsRecursiveFromSolution(EnvDTE.DTE dte)
+    {
+        List<EnvDTE.Project> projectList = new List<EnvDTE.Project>();
+        var folders = dte.Solution.Projects.Cast<EnvDTE.Project>().Where(p => p.Kind == EnvDTE80.ProjectKinds.vsProjectKindSolutionFolder);
+ 
+        foreach (EnvDTE.Project folder in folders)
+        {
+            foreach (EnvDTE.ProjectItem item in folder.ProjectItems)
+            {
+                if(item.Object == null)
+                {
+                    continue;
+                }
+                if((item.Object as EnvDTE.Project).Kind ==  EnvDTE.Constants.vsProjectKindSolutionItems )
+                {
+                    projectList.AddRange(GetAllProjectsRecursive(item.Object as EnvDTE.Project));
+                }
+                else if (item.Object is EnvDTE.Project)
+                {
+                    projectList.Add(item.Object as EnvDTE.Project);
+                }
+            }
+        }
+        var projects = dte.Solution.Projects.Cast<EnvDTE.Project>().Where(p => p.Kind != EnvDTE80.ProjectKinds.vsProjectKindSolutionFolder);
+        projectList.AddRange(projects);
+ 
+        return projectList;
+    }
+    public static IEnumerable<Project> GetAllProjectsRecursive(EnvDTE.Project folder)
+    {
+        List<EnvDTE.Project> projectList = new List<EnvDTE.Project>();
+ 
+        if (folder.ProjectItems != null)
+        {
+            foreach (EnvDTE.ProjectItem item in folder.ProjectItems)
+            {
+                if(item.Object == null)
+                {
+                    continue;
+                }
+                if((item.Object as EnvDTE.Project).Kind ==  EnvDTE.Constants.vsProjectKindSolutionItems )
+                {
+                    projectList.AddRange(GetAllProjectsRecursive(item.Object as EnvDTE.Project));
+                }
+                else if (item.Object is EnvDTE.Project)
+                {
+                    projectList.Add(item.Object as EnvDTE.Project);
+                }
+            }
+        }
+        return projectList;
+    }
+
+    // Get the current project the T4 template is in.
+    public EnvDTE.Project GetCurrentProject() {
+        var serviceProvider = (IServiceProvider)this.Host;
+        var dte = (EnvDTE.DTE)serviceProvider.GetService(typeof(EnvDTE.DTE));
+        var projectItem = dte.Solution.FindProjectItem(this.Host.TemplateFile);
+        var project = projectItem.ContainingProject;
+        return project;
+    }
+
+    // Gets the generic type of which the lists exists (supports List<>, ICollection<>)
+    public string GetListedType(EnvDTE.CodeProperty property)
+    {
+        return property.Type.AsFullName
+            .Replace("System.Collections.Generic.List<", "").Replace(">","")
+            .Replace("System.Collections.Generic.IList<", "").Replace(">","")
+            .Replace("System.Collections.Generic.ICollection<", "").Replace(">","");
+    }
+
+
+
+    public bool IsCollection(String typeName) {
+        return typeName.StartsWith("System.Collections.Generic.List") ||
+            typeName.StartsWith("System.Collections.Generic.IList") ||
+            typeName.StartsWith("System.Collections.Generic.ICollection")	
+            ;
+    }
+
+    public bool IsClassIncludedInList(List<EnvDTE.CodeClass> classes, String name) {
+        return classes.Any(dt => dt.Namespace.Name + "." + dt.Name == name);
+    }
+
+
+
+    // Gets all the classes from a project.
+    public List<EnvDTE.CodeClass> GetClassesOf(EnvDTE.Project project)
+    {
+        var items = GetProjectItemsRecursively(project.ProjectItems);
+
+        var classes = new List<EnvDTE.CodeClass>();
+
+        foreach(var item in items.Where(d => d.Properties.Item("FullPath").Value.ToString().EndsWith(".cs")))
+        {        
+            if(item.FileCodeModel != null)
+            {
+                foreach (EnvDTE.CodeElement element in item.FileCodeModel.CodeElements)
+                {
+                    if (element is EnvDTE.CodeNamespace)
+                    {
+                        EnvDTE.CodeNamespace ns = (EnvDTE.CodeNamespace)element;
+					
+                        foreach (EnvDTE.CodeElement elem in ns.Members)
+                        {
+                            if (elem is EnvDTE.CodeClass)
+                            {
+                                classes.Add(elem as EnvDTE.CodeClass);
+
+                                /*
+                                var classElement = elem as EnvDTE.CodeClass
+                                if (classElement != null && !classElement.IsAbstract )
+                                    classes.Add(elem);
+                                */
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return classes;
+    }
+
+
+    public List<EnvDTE.CodeProperty> GetAllPropertiesAndInheritedProperties(EnvDTE.CodeClass domainClass, List<EnvDTE.CodeClass> allClasses) {
+        var properties = FindProperties(domainClass.Members);
+
+        AddBaseClassProperties(domainClass, allClasses, properties);
+
+
+        return properties;
+    }
+
+    public void AddBaseClassProperties(EnvDTE.CodeClass domainClass, List<EnvDTE.CodeClass> allClasses, List<EnvDTE.CodeProperty> properties) {
+        
+        if	(domainClass.Bases  != null) {
+            foreach(CodeElement  b in domainClass.Bases )
+            {
+                //if(IsClassIncludedInList(allClasses, b.FullName)) {
+                    EnvDTE.CodeClass parent =  ((EnvDTE.CodeClass)b);
+                    AddProperties(properties, parent.Members);
+
+                    AddBaseClassProperties(parent, allClasses, properties);
+                //}
+            }
+        }        
+    }
+
+
+    public void AddProperties(List<EnvDTE.CodeProperty> properties, EnvDTE.CodeElements elements)
+    {
+        foreach (EnvDTE.CodeElement element in elements)
+        {
+            EnvDTE.CodeProperty p = element as EnvDTE.CodeProperty;
+        
+            if (p != null)
+                properties.Add(p);            
+        }
+    
+    }
+
+    public List<EnvDTE.CodeProperty> FindProperties(EnvDTE.CodeElements elements)
+    {
+        List<EnvDTE.CodeProperty> properties = new List<EnvDTE.CodeProperty>();
+        
+        foreach (EnvDTE.CodeElement element in elements)
+        {
+            EnvDTE.CodeProperty p = element as EnvDTE.CodeProperty;
+        
+            if (p != null)
+                properties.Add(p);            
+        }
+    
+        return properties;
+    }
+
+
+    // Helper method to recursively retrieve all the project items
+    private List<EnvDTE.ProjectItem> GetProjectItemsRecursively(EnvDTE.ProjectItems items)
+    {
+        var ret = new List<EnvDTE.ProjectItem>();
+		
+        if (items == null) 
+            return ret;             
+		
+        foreach(EnvDTE.ProjectItem item in items)
+        {
+            ret.Add(item);
+            ret.AddRange(GetProjectItemsRecursively(item.ProjectItems));
+        }
+		
+        return ret;
+    }
+
+
+
+
+    // Get the project containing a specific filename
+    //public EnvDTE.Project GetProjectContainingFile(string filename)
+    //{
+    //var visualStudio = (this.Host as IServiceProvider).GetService(typeof(EnvDTE.DTE)) as EnvDTE.DTE;
+    //return visualStudio.Solution.FindProjectItem(filename).ContainingProject as EnvDTE.Project;
+    //}
+
+#>

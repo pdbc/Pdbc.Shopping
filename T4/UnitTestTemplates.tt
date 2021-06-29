@@ -1,0 +1,68 @@
+<#@ template language="C#" debug="false" hostspecific="true" #>
+<#@ assembly name="System" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity" #>
+<#@ assembly name="EnvDTE" #>
+<#@ import namespace="EnvDTE" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Reflection" #>
+<#+ 
+
+<#+
+public void GenerateMapperTestHelper(string ns, EnvDTE.CodeClass requestClass,  List<EnvDTE.CodeClass> requestClasses, EnvDTE.CodeClass cqrsClass, List<EnvDTE.CodeClass> cqrsClasses) 
+ {   
+        var requestProperties = GetAllPropertiesAndInheritedProperties(requestClass, requestClasses);
+        var cqrsProperties = GetAllPropertiesAndInheritedProperties(cqrsClass, cqrsClasses);
+
+        var isIncoming = IsIncomingType(requestClass);
+        var isOutgoing = IsOutgoingType(requestClass);
+#>
+
+namespace <#=ns#> {
+//<#=requestClass.Name#>  -> //<#=cqrsClass.Name#>
+public static class <#= requestClass.Name #>TestExtensions
+    {
+
+        <#+ 
+        if (isIncoming) {
+            GenerateMapperHelperMethod(requestClass, requestClasses, cqrsClass, cqrsClasses);
+        }    
+       
+        if (isOutgoing) {
+            GenerateMapperHelperMethod(cqrsClass, cqrsClasses, requestClass, requestClasses);
+        }    
+        #>
+    } // class
+} // ns
+<#+
+    }
+#>
+
+
+<#+
+public void GenerateMapperHelperMethod(EnvDTE.CodeClass requestClass,  List<EnvDTE.CodeClass> requestClasses, EnvDTE.CodeClass cqrsClass, List<EnvDTE.CodeClass> cqrsClasses) 
+ {   
+        var requestProperties = GetAllPropertiesAndInheritedProperties(requestClass, requestClasses);
+        var cqrsProperties = GetAllPropertiesAndInheritedProperties(cqrsClass, cqrsClasses);
+
+#>
+    public static void AssertPropertiesAreMapped(this <#= requestClass.FullName #> item, <#= cqrsClass.FullName #> from)
+    {
+            <#+  foreach(var property in requestProperties)
+            {
+            #>
+                item.<#=property.Name #>.ShouldBeEqualTo(from.<#=property.Name #>);
+            <#+
+               } // foreach            
+            #>         
+        }   // method         
+
+<#+
+    }
+#>
+
+
+#>

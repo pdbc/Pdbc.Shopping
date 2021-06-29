@@ -1,0 +1,26 @@
+<#@ template language="C#" debug="false" hostspecific="true" #>
+<#@ assembly name="System" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity" #>
+<#@ assembly name="EnvDTE" #>
+<#@ import namespace="EnvDTE" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Reflection" #>
+
+
+<#+
+public void GenerateRequestCqrsMapperConfiguration(string name, EnvDTE.CodeClass requestClass, EnvDTE.CodeClass cqrsClass) 
+{   
+   var isIncoming = IsIncomingType(requestClass);
+   var isOutgoing = IsOutgoingType(requestClass);
+#>
+<#+ if (isIncoming) {#>
+CreateMap<<#= requestClass.FullName #>, <#= cqrsClass.FullName#>>();
+<#+ } #>
+<#+  if (isOutgoing) {#>
+CreateMap<<#= cqrsClass.FullName #>, <#= requestClass.FullName#>>();
+<#+ }#>
+<#+ }#>

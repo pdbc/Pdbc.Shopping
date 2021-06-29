@@ -1,0 +1,173 @@
+<#@ template language="C#" debug="True" #>
+<#@ assembly name="System" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity" #>
+<#@ assembly name="EnvDTE" #>
+<#@ import namespace="EnvDTE" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Reflection" #>
+
+<#+
+public void GenerateSingleItemBuilderTemplate(string builderName, string propertyTypeFullName, string propertyName, string propertyNameAsAttribute) 
+    {
+#>
+protected <#=propertyTypeFullName#> <#=propertyName#> { get; set; }		
+public <#= builderName #> With<#=propertyName #>(<#=propertyTypeFullName #> <#=propertyNameAsAttribute #>)
+{
+    this.<#=propertyName #> = <#=propertyNameAsAttribute #>;
+	return this;
+}	
+<#+
+    }
+#>
+
+
+
+
+<#+
+public void GenerateNesterBuilderTemplate(string builderName, string propertyName, string builderType, string propertyNameAsAttribute) 
+    {
+#>
+
+public <#= builderName #> With<#=propertyName #>(Action<<#=builderType #>> <#=propertyNameAsAttribute #>Builder)
+{
+	var b = new <#=builderType #>();
+	<#=propertyNameAsAttribute#>Builder.Invoke(b);
+	this.<#=propertyName #> = b.Build();
+	return this;
+}
+
+
+<#+
+    }
+#>
+
+
+
+<#+
+public virtual void GenerateForCollectionBuilderTemplate(string builderName, string propertyTypeFullName, string propertyName, string propertyNameAsAttribute, string genericListType) 
+    {
+#>
+protected <#=propertyTypeFullName #> <#=propertyName #> { get; set; } = new System.Collections.Generic.List<<#=genericListType#>>();
+		
+public <#= builderName #> With<#=propertyName #>(params <#=genericListType #>[] <#=propertyNameAsAttribute #>)
+{
+	<#=propertyName #> = <#=propertyNameAsAttribute #>.ToList();
+	return this;
+}
+			
+
+
+public virtual <#= builderName #> Add<#=propertyName #>Item(<#=genericListType #> item)
+{
+	if (<#=propertyName #> == null) {
+		<#=propertyName #> = new System.Collections.Generic.List<<#=genericListType#>>();
+	}
+
+	this.<#=propertyName #>.Add(item);
+	return this;
+}
+
+public virtual bool Contains<#=propertyName #>Item(<#=genericListType #> item)
+{
+    if (<#=propertyName #> != null)
+    {
+        return this.<#=propertyName #>.Contains(item);
+    }
+    return false;
+}
+
+public virtual <#= builderName #> Remove<#=propertyName #>Item(<#=genericListType #> item)
+{
+	if (<#=propertyName #> == null) {
+		<#=propertyName #> = new System.Collections.Generic.List<<#=genericListType#>>();
+	}
+
+	this.<#=propertyName #>.Remove(item);
+	return this;
+}
+public virtual <#= builderName #> Clear<#=propertyName #>()
+{
+	if (<#=propertyName #> == null) {
+		<#=propertyName #> = new System.Collections.Generic.List<<#=genericListType#>>();
+	}
+
+	this.<#=propertyName #>.Clear();
+	return this;
+}
+
+
+
+
+//public virtual <#= builderName #> With<#=propertyName #>(params Action<<#=genericListType #>Builder>[] builders)
+//{
+	//var <#=propertyNameAsAttribute #> = new System.Collections.Generic.List<<#=genericListType#>>();
+//
+	//foreach(var builder in builders)
+	//{
+		//var b = new <#=genericListType #>Builder();
+		//builder.Invoke(b);
+		//<#=propertyNameAsAttribute #>.Add(b.Build());
+	//}
+//
+	//this.<#=propertyName #>  = <#=propertyNameAsAttribute #>;
+//
+	//return this;
+//}
+
+//public <#= builderName #> Add<#=propertyName #>Item(<#=genericListType #> item)
+//{
+	//if (<#=propertyName #> == null) {
+		//<#=propertyName #> = new System.Collections.Generic.List<<#=genericListType#>>();
+	//}
+//
+	//this.<#=propertyName #>.Add(item);
+	//return this;
+//}
+
+
+<#+
+    }
+#>
+
+
+<#+
+public virtual void GenerateBuildMethod(string className, List<EnvDTE.CodeProperty> properties) 
+    {
+#>
+
+public override <#= className #> Build()
+{
+    var item = (<#= className#>)Activator.CreateInstance(typeof(<#=className#>));
+    <#+foreach(var property in properties) { #>	
+	<#+if(property.Setter != null && property.Setter.Access == EnvDTE.vsCMAccess.vsCMAccessPublic) { #>	
+	item.<#=property.Name #> = <#=property.Name #>;
+	<#+ } #>
+    <#+ } /* foreach (properties) */ #>
+
+    return item;
+}
+<#+
+    }
+#>
+
+<#+
+public void GenerateInfoRegionForPropertyTemplate(string propertyTypeFullName, string propertyName, string propertyNameAsAttribute, bool isCollectionTypeProperty, bool isTypeInClassesCollection, string listedType, string propertyBuilderFullName) {
+#>
+
+        #region Variables (Properties)
+        // propertyTypeFullName <#=propertyTypeFullName#>
+        // propertyName: <#=propertyName #> 
+        // propertyNameAsAttribute <#=propertyNameAsAttribute #>
+        // isCollectionTypeProperty <#=isCollectionTypeProperty #>
+        // isTypeInClassesCollection <#=isTypeInClassesCollection #>
+        // listedType <#=listedType #>
+        // propertyBuilderFullName <#=propertyBuilderFullName #>
+        #endregion
+<#+
+    }
+#>
+

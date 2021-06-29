@@ -1,0 +1,97 @@
+<#@ template language="C#" debug="false" hostspecific="true" #>
+<#@ assembly name="System" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity" #>
+<#@ assembly name="EnvDTE" #>
+<#@ assembly name="EnvDTE80" #>
+<#@ import namespace="EnvDTE" #>
+<#@ import namespace="EnvDTE80" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Reflection" #>
+<#+ 
+
+    // Gets all the domain classes from the project (Convention = namespace = Entities)
+    public List<EnvDTE.CodeClass> GetNamespaceClasses(EnvDTE.Project project, String ns) {
+        var classes = GetClassesOf(project).Where(c => c.Namespace.Name.EndsWith(ns)
+                                    && !c.IsAbstract
+                                    && !c.Name.EndsWith("Builder")
+                                    && !c.Namespace.Name.EndsWith("Enums")
+									&& !c.Name.EndsWith("Constants")
+                        ).ToList();
+        return classes;
+    }
+
+
+    // Gets all the CQRS classes from the project (convention = Command,Query,Info)
+    public List<EnvDTE.CodeClass> GetCqrsClasses(EnvDTE.Project project) {
+        return GetClassesOf(project).Where(c => 
+				// Specify the name prefixes
+				(
+                    c.Name.EndsWith("Query") ||
+                    c.Name.EndsWith("ViewModel") ||
+                    c.Name.EndsWith("Command")
+
+                )  &&
+                
+                // Ignore all the Builder classes
+				!c.Name.EndsWith("Builder")
+				).ToList();	
+    }
+
+    // Gets all the request objects from the project (Convention = Request)
+    public List<EnvDTE.CodeClass> GetApiContractClasses(EnvDTE.Project project) {
+        return GetClassesOf(project).Where(c => 
+                    c.Name.EndsWith("Request") || 
+                    c.Name.EndsWith("Response") || 
+                    c.Name.EndsWith("Dto")).ToList();	
+    }
+
+
+    // Finds the matching CQRS contract class for an API contract class
+   public string GetMatchingCqrsClassNameFor(EnvDTE.CodeClass c) {
+
+        var name = GetSpecificNameFromClass(c);
+
+        var isGetRequest = c.Name.StartsWith("Get") || 
+                           c.Name.StartsWith("List") || 
+                           c.Name.StartsWith("IsServiceRunning") ;
+       
+
+        if (c.Name.EndsWith("Request")) {
+            if (isGetRequest) {
+                return name+"Query";
+            } else {
+                return name+"Command";
+            }
+        }
+
+        if (c.Name.EndsWith("Dto")) {
+            return name+"Info";
+        }
+
+        if (c.Name.EndsWith("Response")) {
+			if (isGetRequest) {
+				return name+"ViewModel";
+			} else {
+                return name+"Result";
+            }
+
+        }
+         
+        return "";
+    }
+
+
+    // Gets the name without the postfix defining why it is for.
+    public string GetSpecificNameFromClass(EnvDTE.CodeClass c) {
+            return c.Name
+                        .Replace("Request", "")
+                        .Replace("Response", "")
+                        .Replace("Dto", "")
+                        .Replace("Command", "")
+                        .Replace("Query", "");
+    }
+#>

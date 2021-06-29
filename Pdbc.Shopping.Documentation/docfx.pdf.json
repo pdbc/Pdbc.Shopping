@@ -1,0 +1,55 @@
+{
+  "pdf": {
+    "content": [
+      {
+        "files": [],
+        "cwd": "obj"
+      },
+      {
+        "files": [
+          "general/**/*.{md,yml}",
+          "articles/**/*.{md,yml}",
+          "cookbooks/**/*.{md,yml}",
+          "concepts/**/*.{md,yml}",
+          "questions/**/*.{md,yml}",
+          "flows/**/*.{md,yml}",
+          "scopes/**/*.{md,yml}",
+          "api/**/*.{md,yml}",
+          "*.{md,yml}",
+          "*.{md,yml}",
+          "pdf/**"
+
+        ],
+        "exclude": [
+          "obj/**",
+          "_site/**",
+          "_site_pdf",
+          "**/toc.yml",
+          "**/toc.md"
+        ]
+      },
+      {
+        "files": [
+          "pdf/fr/toc.yml",
+          "pdf/nl/toc.yml",
+          "pdf/de/toc.yml",
+          "pdf/en/toc.yml"
+        ]
+      }
+    ],
+    "resource": [
+      {
+        "files": [ "images/**", "files/**" ],
+        "exclude": [ "obj/**", "_site/**", "_site_pdf/**" ]
+      }
+    ],
+    "overwrite": [
+      {
+        "files": [ "apidoc/**.md" ],
+        "exclude": [ "obj/**", "_site/**" ]
+      }
+    ],
+    "dest": "_site_pdf"
+  }
+
+}

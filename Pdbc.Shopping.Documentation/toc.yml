@@ -1,0 +1,38 @@
+- name: General
+  href: general/
+  topicHref: general/intro.md
+
+- name: Articles
+  href: articles/
+  topicHref: articles/overview/intro.md 
+
+- name: Cookbooks
+  href: Cookbooks/
+  topicHref: Cookbooks/intro.md
+
+- name: Internal
+  href: Internal/intro.md
+  
+- name: Administration UI
+  href: Flows/Admin/
+  topicHref: Flows/Admin/intro.md
+
+- name: Portal UI
+  href: Flows/portal/
+  topicHref: Flows/portal/intro.md
+
+- name: User Journey
+  href: flows/UserJourney/overview/
+  topicHref: flows/UserJourney/overview/intro.md
+
+- name: Application Scopes
+  href: scopes/overview/
+  topicHref: scopes/overview/intro.md
+
+- name: FAQ
+  href: flows/faq/overview/
+  topicHref: flows/faq/overview/intro.md
+
+- name: URLs
+  href: api/
+  homepage: api/intro.md
