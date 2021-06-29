@@ -23,7 +23,7 @@ namespace Pdbc.Shopping.Domain.Model
 
         public override int GetHashCode()
         {
-            return (Id != null ? Id.GetHashCode() : 0);
+            return Id.GetHashCode();
         }
 
         #endregion
