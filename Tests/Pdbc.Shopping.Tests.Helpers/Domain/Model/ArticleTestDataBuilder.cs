@@ -8,7 +8,6 @@ namespace Pdbc.Shopping.Tests.Helpers.Domain.Model
         public ArticleTestDataBuilder()
         {
             this.Name = UnitTestValueGenerator.GenerateText(128);
-            this.Brand = UnitTestValueGenerator.GenerateText(16);
 
             // Auditable 
             this.CreatedBy = UnitTestValueGenerator.GenerateText(16);

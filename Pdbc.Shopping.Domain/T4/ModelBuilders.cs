@@ -107,12 +107,6 @@ public ArticleBuilder WithName(System.String name)
     this.Name = name;
 	return this;
 }	
-protected System.String Brand { get; set; }		
-public ArticleBuilder WithBrand(System.String brand)
-{
-    this.Brand = brand;
-	return this;
-}	
 protected System.String CreatedBy { get; set; }		
 public ArticleBuilder WithCreatedBy(System.String createdby)
 {
@@ -152,9 +146,6 @@ public override Article Build()
     	
 		
 	item.Name = Name;
-	    	
-		
-	item.Brand = Brand;
 	    	
 		
 	item.CreatedBy = CreatedBy;

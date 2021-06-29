@@ -21,3 +21,8 @@ In this case I've added an ObjectBuilder interface/base class into to this proje
 It provides better readability and allows to creation of TestObjectBuilders to create correctly filled in object in my tests.
 
 For more info about how I use the builder pattern see [Test Data Builder page](Pdbc.Shopping.Documentation/articles/data-builders.md)
+
+## Persistence
+
+Logically we want to store our shopping lists & articles in some sort of database.  Any persistence mechanism will suffice of course.  In this proejct I've opted for 
+Entity Framework Core.  

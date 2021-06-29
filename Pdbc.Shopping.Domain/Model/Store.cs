@@ -9,5 +9,10 @@ namespace Pdbc.Shopping.Domain.Model
         public virtual Address Address { get; set; }
 
         public virtual Article[] Articles { get; set; }
+
+        public override int GetHashCode()
+        {
+            return (Name != null ? Name.GetHashCode() : 0);
+        }
     }
 }

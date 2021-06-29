@@ -2,10 +2,13 @@
 
 namespace Pdbc.Shopping.Domain.Model
 {
-    public class Article : BaseEquatableEntity<Store>
+    public class Article : BaseEquatableEntity<Article>
     {
         public virtual String Name { get; set; }
 
-        public virtual String Brand { get; set; }
+        public override int GetHashCode()
+        {
+            return (Name != null ? Name.GetHashCode() : 0);
+        }
     }
 }

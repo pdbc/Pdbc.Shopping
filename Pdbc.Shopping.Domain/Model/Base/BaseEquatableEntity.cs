@@ -10,7 +10,7 @@ namespace Pdbc.Shopping.Domain.Model
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return string.Equals(Id, other.Id);
+            return string.Equals(GetHashCode(), other.GetHashCode());
         }
 
         public override bool Equals(object obj)
