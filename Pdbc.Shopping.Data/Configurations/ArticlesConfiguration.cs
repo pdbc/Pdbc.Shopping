@@ -17,10 +17,7 @@ namespace Pdbc.Shopping.Data.Configurations
             builder.Property(e => e.Name)
                 .HasMaxLength(ValidationConstants.ArticleNameMaxLength)
                 .IsRequired();
-            builder.Property(e => e.Brand)
-                .HasMaxLength(ValidationConstants.ArticleBrandMaxLength)
-                .IsRequired();
-
+            
             builder.HasIndex(e => new { e.Name }).IsUnique();
         }
     }

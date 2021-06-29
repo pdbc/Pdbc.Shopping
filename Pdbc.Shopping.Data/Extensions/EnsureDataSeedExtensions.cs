@@ -14,8 +14,8 @@ namespace Pdbc.Shopping.Data.Extensions
         public static void SetupInitialData(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Article>().HasData(
-                new ArticleBuilder().WithName("Milk (mager)").WithBrand("").Build(),
-                new ArticleBuilder().WithName("Milk (lactose vrij)").WithBrand("").Build()
+                new ArticleBuilder().WithName("Milk (mager)").Build(),
+                new ArticleBuilder().WithName("Milk (lactose vrij)").Build()
                 );
 
             modelBuilder.Entity<Store>().HasData(
