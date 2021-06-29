@@ -1,5 +1,9 @@
 # Articles
 
-This section of the documentation contains all the relevant articles 
+All relevant articles are listed here:
 
-[More info about Operation Employer Groups](../test-data-builder.md)
+* [Domain Classes](../domain-classes.md)
+* [Builders & Test Data Builder](../data-builder.md)
+* [Data & Entity Framework](../data-entity-framework.md)
+* [T4 Templates](../t4-templates.md)
+
