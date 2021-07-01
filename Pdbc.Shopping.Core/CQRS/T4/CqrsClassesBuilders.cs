@@ -8,6 +8,66 @@
 using System;
 using System.Linq;
 using Pdbc.Shopping.Common;
+namespace Pdbc.Shopping.Core.CQRS.Health.DependencyCheck {
+    public partial class DependencyCheckQueryBuilder : ObjectBuilder<Pdbc.Shopping.Core.CQRS.Health.DependencyCheck.DependencyCheckQuery>
+	{
+       
+       
+public override DependencyCheckQuery Build()
+{
+    var item = (DependencyCheckQuery)Activator.CreateInstance(typeof(DependencyCheckQuery));
+    
+    return item;
+}
+      
+    }
+}
+
+namespace Pdbc.Shopping.Core.CQRS.Health.DependencyCheck {
+    public partial class DependencyCheckViewModelBuilder : ObjectBuilder<Pdbc.Shopping.Core.CQRS.Health.DependencyCheck.DependencyCheckViewModel>
+	{
+       
+       
+public override DependencyCheckViewModel Build()
+{
+    var item = (DependencyCheckViewModel)Activator.CreateInstance(typeof(DependencyCheckViewModel));
+    
+    return item;
+}
+      
+    }
+}
+
+namespace Pdbc.Shopping.Core.CQRS.Health.LifelineCheck {
+    public partial class LifelineCheckQueryBuilder : ObjectBuilder<Pdbc.Shopping.Core.CQRS.Health.LifelineCheck.LifelineCheckQuery>
+	{
+       
+       
+public override LifelineCheckQuery Build()
+{
+    var item = (LifelineCheckQuery)Activator.CreateInstance(typeof(LifelineCheckQuery));
+    
+    return item;
+}
+      
+    }
+}
+
+namespace Pdbc.Shopping.Core.CQRS.Health.LifelineCheck {
+    public partial class LifelineCheckViewModelBuilder : ObjectBuilder<Pdbc.Shopping.Core.CQRS.Health.LifelineCheck.LifelineCheckViewModel>
+	{
+       
+       
+public override LifelineCheckViewModel Build()
+{
+    var item = (LifelineCheckViewModel)Activator.CreateInstance(typeof(LifelineCheckViewModel));
+    
+    return item;
+}
+      
+    }
+}
+
 namespace Pdbc.Shopping.Core.CQRS.Resources.ErrorMessages.Get {
     public partial class GetErrorMessageQueryBuilder : ObjectBuilder<Pdbc.Shopping.Core.CQRS.Resources.ErrorMessages.Get.GetErrorMessageQuery>
 	{
