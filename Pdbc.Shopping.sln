@@ -40,6 +40,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IntegrationTests", "Integra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pdbc.Shopping.UnitTests", "Tests\Pdbc.Shopping.UnitTests\Pdbc.Shopping.UnitTests.csproj", "{678C91F4-EF11-45F8-BF42-32F2B72011B5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pdbc.Shopping.I18N", "Pdbc.Shopping.I18N\Pdbc.Shopping.I18N.csproj", "{FA46B83D-7495-43E0-949A-F721E3E50EB2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,6 +68,10 @@ Global
 		{678C91F4-EF11-45F8-BF42-32F2B72011B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{678C91F4-EF11-45F8-BF42-32F2B72011B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{678C91F4-EF11-45F8-BF42-32F2B72011B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA46B83D-7495-43E0-949A-F721E3E50EB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA46B83D-7495-43E0-949A-F721E3E50EB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA46B83D-7495-43E0-949A-F721E3E50EB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA46B83D-7495-43E0-949A-F721E3E50EB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

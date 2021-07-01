@@ -4,12 +4,14 @@
 <#@ assembly name="System.Core" #>
 <#@ assembly name="System.Data.Entity" #>
 <#@ assembly name="EnvDTE" #>
+
 <#@ import namespace="EnvDTE" #>
 <#@ import namespace="System" #>
 <#@ import namespace="System.Collections" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Reflection" #>
+
 <#@ include file="$(SolutionDir)T4\Utilities.tt" #>
 <#@ include file="$(SolutionDir)T4\BuilderGenerationTemplates.tt" #>
 <#
@@ -20,8 +22,6 @@
 #>
 using System;
 using System.Linq;
-
-
 
 using Pdbc.Shopping.Common;
 <# 
