@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <EmbeddedResource Update="ErrorResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ErrorResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>

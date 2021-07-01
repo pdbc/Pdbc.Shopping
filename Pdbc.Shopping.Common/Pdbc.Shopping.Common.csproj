@@ -17,4 +17,8 @@
     <PackageReference Include="Scrutor" Version="3.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Pdbc.Shopping.I18N\Pdbc.Shopping.I18N.csproj" />
+  </ItemGroup>
+
 </Project>

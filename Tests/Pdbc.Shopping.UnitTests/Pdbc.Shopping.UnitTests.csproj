@@ -16,4 +16,19 @@
     <ProjectReference Include="..\Pdbc.Shopping.Tests.Helpers\Pdbc.Shopping.Tests.Helpers.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Common\Extensions\UnitTestResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UnitTestResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Common\Extensions\UnitTestResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>UnitTestResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>
