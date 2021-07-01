@@ -68,5 +68,14 @@ namespace Pdbc.Shopping.I18N {
                 return ResourceManager.GetString("LanguageIsEmpty", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resource Key is empty and is required..
+        /// </summary>
+        public static string ResourceKeyIsEmpty {
+            get {
+                return ResourceManager.GetString("ResourceKeyIsEmpty", resourceCulture);
+            }
+        }
     }
 }

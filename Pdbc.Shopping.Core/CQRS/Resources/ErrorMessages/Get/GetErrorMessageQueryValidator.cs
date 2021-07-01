@@ -14,7 +14,8 @@ namespace Pdbc.Shopping.Core.CQRS.Resources.ErrorMessages.Get
                 .WithErrorCode(nameof(ErrorResources.LanguageIsEmpty));
 
             RuleFor(i => i.Key)
-                .NotEmpty();
+                .NotEmpty()
+                .WithErrorCode(nameof(ErrorResources.ResourceKeyIsEmpty));
         }
     }
 }

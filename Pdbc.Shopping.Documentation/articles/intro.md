@@ -9,4 +9,6 @@ All relevant articles are listed here:
 * [I18N Localization](../i18n-localization.md)
 * [CQRS](../cqrs.md)
 * [Validation](../validation.md)
+* [Testing](../testing.md)
+
 
