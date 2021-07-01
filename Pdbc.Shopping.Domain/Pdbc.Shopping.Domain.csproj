@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Common\**" />
+    <EmbeddedResource Remove="Common\**" />
+    <None Remove="Common\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="T4\ModelBuilders.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ModelBuilders.cs</LastGenOutput>
@@ -21,10 +27,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ModelBuilders.tt</DependentUpon>
     </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Common\" />
   </ItemGroup>
 
   <ItemGroup>

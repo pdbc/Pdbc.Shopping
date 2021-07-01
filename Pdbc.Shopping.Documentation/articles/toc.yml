@@ -15,3 +15,9 @@
 
 - name: I18N & Localization
   href: i18n-Localization.md  
+
+- name: CQRS
+  href: cqrs.md    
+
+- name: Validation
+  href: validation.md     

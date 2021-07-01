@@ -5,11 +5,11 @@
 
 
 
+
 using System;
 using System.Linq;
 
 using Pdbc.Shopping.Common;
-
 namespace Pdbc.Shopping.Domain.Model {
     public partial class AddressBuilder : ObjectBuilder<Pdbc.Shopping.Domain.Model.Address>
 	{
@@ -62,8 +62,7 @@ public AddressBuilder WithId(System.Int64 id)
 	return this;
 }	
 
-
-
+       
 public override Address Build()
 {
     var item = (Address)Activator.CreateInstance(typeof(Address));
@@ -94,7 +93,7 @@ public override Address Build()
 	    
     return item;
 }
-       
+      
     }
 }
 
@@ -138,8 +137,7 @@ public ArticleBuilder WithId(System.Int64 id)
 	return this;
 }	
 
-
-
+       
 public override Article Build()
 {
     var item = (Article)Activator.CreateInstance(typeof(Article));
@@ -164,7 +162,7 @@ public override Article Build()
 	    
     return item;
 }
-       
+      
     }
 }
 
@@ -296,8 +294,7 @@ public ShoppingListBuilder WithId(System.Int64 id)
 	return this;
 }	
 
-
-
+       
 public override ShoppingList Build()
 {
     var item = (ShoppingList)Activator.CreateInstance(typeof(ShoppingList));
@@ -325,7 +322,7 @@ public override ShoppingList Build()
 	    
     return item;
 }
-       
+      
     }
 }
 
@@ -391,8 +388,7 @@ public StoreBuilder WithId(System.Int64 id)
 	return this;
 }	
 
-
-
+       
 public override Store Build()
 {
     var item = (Store)Activator.CreateInstance(typeof(Store));
@@ -423,6 +419,7 @@ public override Store Build()
 	    
     return item;
 }
-       
+      
     }
 }
+

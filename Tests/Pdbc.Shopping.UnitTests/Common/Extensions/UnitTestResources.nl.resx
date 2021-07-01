@@ -119,8 +119,10 @@
   </resheader>
   <data name="Label_DateOfBirth" xml:space="preserve">
     <value>Geboortedatum</value>
+    <comment>Commentaar geboortedatum</comment>
   </data>
   <data name="Label_Name" xml:space="preserve">
     <value>Naam</value>
+    <comment>Commentaar naam</comment>
   </data>
 </root>

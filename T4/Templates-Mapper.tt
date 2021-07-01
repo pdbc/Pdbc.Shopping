@@ -9,8 +9,6 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Reflection" #>
-
-
 <#+
 public void GenerateRequestCqrsMapperConfiguration(string name, EnvDTE.CodeClass requestClass, EnvDTE.CodeClass cqrsClass) 
 {   

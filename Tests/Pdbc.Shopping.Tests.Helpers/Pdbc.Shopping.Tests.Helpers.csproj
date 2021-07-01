@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Pdbc.Shopping.Core\Pdbc.Shopping.Core.csproj" />
     <ProjectReference Include="..\..\Pdbc.Shopping.Domain\Pdbc.Shopping.Domain.csproj" />
   </ItemGroup>
 

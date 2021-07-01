@@ -4,7 +4,6 @@
 <#@ assembly name="System.Core" #>
 <#@ assembly name="System.Data.Entity" #>
 <#@ assembly name="EnvDTE" #>
-
 <#@ import namespace="EnvDTE" #>
 <#@ import namespace="System" #>
 <#@ import namespace="System.Collections" #>
@@ -21,11 +20,10 @@
     // Setup variables for using throughout the script.
     var project = GetCurrentProject();
     var projectName = project.FullName;
-    var classes = GetNamespaceClasses(project, "Model"); 
+    var classes = GetCqrsClasses(project); 
 #>
 using System;
 using System.Linq;
-
 using Pdbc.Shopping.Common;
 <# 
 	foreach(var c in classes)
@@ -33,8 +31,10 @@ using Pdbc.Shopping.Common;
 		// Setup the variables that will be used throughout the script for this particular class	
         var className = c.Name;
         var classNamespace = c.Namespace.Name;
-        var properties = GetAllPropertiesAndInheritedProperties(c, classes);
+       
         
+        var properties = GetAllPropertiesAndInheritedProperties(c, classes);
+
         GenerateObjectBuilderTemplate(className, classNamespace, properties, classes);
     }
 #>

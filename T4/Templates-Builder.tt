@@ -9,6 +9,68 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Reflection" #>
+<#+
+public void GenerateObjectBuilderTemplate(string className, string classNamespace, List<EnvDTE.CodeProperty> properties, List<EnvDTE.CodeClass> classes) 
+    {
+    var builderName = className+"Builder";
+    var classNameFullyQualified = classNamespace + "." +className;
+#>
+namespace <#=classNamespace#> {
+    public partial class <#= builderName #> : ObjectBuilder<<#= classNameFullyQualified #>>
+	{
+       <#+foreach(var property in properties)
+	   {
+            // Setup the variables that will be used throughout the script for this particular class	
+            var propertyTypeFullName = property.Type.AsFullName;
+            var propertyName = property.Name;
+            var propertyNameAsAttribute = property.Name.ToLower();
+			if (propertyNameAsAttribute == "continue")
+			{
+				propertyNameAsAttribute = "_" + propertyNameAsAttribute;
+			}
+
+            var isCollectionTypeProperty = IsCollection(propertyTypeFullName);
+            var isTypeInClassesCollection = IsClassIncludedInList(classes, propertyTypeFullName);
+
+            var listedType = "";
+            if (isCollectionTypeProperty) {
+                listedType = GetListedType(property);
+            }
+
+            var propertyBuilderFullName = "";
+            if (isTypeInClassesCollection) {
+                propertyBuilderFullName = propertyTypeFullName+"Builder";
+            }
+
+            //GenerateInfoRegionForPropertyTemplate(propertyTypeFullName, propertyName, propertyNameAsAttribute, isCollectionTypeProperty, isTypeInClassesCollection, listedType, propertyBuilderFullName);
+            if (isCollectionTypeProperty) 
+            {              
+                GenerateForCollectionBuilderTemplate(builderName, propertyTypeFullName, propertyName, propertyNameAsAttribute, listedType); 
+            } 
+            else 
+            {
+                GenerateSingleItemBuilderTemplate(builderName, propertyTypeFullName, propertyName, propertyNameAsAttribute);
+            }
+
+            if (isTypeInClassesCollection) 
+            {    
+                GenerateNesterBuilderTemplate(builderName, propertyName, propertyBuilderFullName, propertyNameAsAttribute);
+            }
+	   } 
+	   #>
+
+       <#+
+       GenerateBuildMethod(className, properties);
+       #>
+      
+    }
+}
+
+<#+
+    }
+#>
+
+
 
 <#+
 public void GenerateSingleItemBuilderTemplate(string builderName, string propertyTypeFullName, string propertyName, string propertyNameAsAttribute) 

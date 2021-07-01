@@ -7,4 +7,6 @@ All relevant articles are listed here:
 * [Data & Entity Framework](../data-entity-framework.md)
 * [T4 Templates](../t4-templates.md)
 * [I18N Localization](../i18n-localization.md)
+* [CQRS](../cqrs.md)
+* [Validation](../validation.md)
 

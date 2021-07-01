@@ -13,6 +13,44 @@
 <#@ import namespace="System.Reflection" #>
 <#+ 
 
+ // Gets all the classes from a project.
+    public List<EnvDTE.CodeClass> GetClassesOf(EnvDTE.Project project)
+    {
+        var items = GetProjectItemsRecursively(project.ProjectItems);
+
+        var classes = new List<EnvDTE.CodeClass>();
+
+        foreach(var item in items.Where(d => d.Properties.Item("FullPath").Value.ToString().EndsWith(".cs")))
+        {        
+            if(item.FileCodeModel != null)
+            {
+                foreach (EnvDTE.CodeElement element in item.FileCodeModel.CodeElements)
+                {
+                    if (element is EnvDTE.CodeNamespace)
+                    {
+                        EnvDTE.CodeNamespace ns = (EnvDTE.CodeNamespace)element;
+					
+                        foreach (EnvDTE.CodeElement elem in ns.Members)
+                        {
+                            if (elem is EnvDTE.CodeClass)
+                            {
+                                classes.Add(elem as EnvDTE.CodeClass);
+
+                                /*
+                                var classElement = elem as EnvDTE.CodeClass
+                                if (classElement != null && !classElement.IsAbstract )
+                                    classes.Add(elem);
+                                */
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return classes;
+    }
+
     // Gets all the domain classes from the project (Convention = namespace = Entities)
     public List<EnvDTE.CodeClass> GetNamespaceClasses(EnvDTE.Project project, String ns) {
         var classes = GetClassesOf(project).Where(c => c.Namespace.Name.EndsWith(ns)
@@ -48,6 +86,8 @@
                     c.Name.EndsWith("Response") || 
                     c.Name.EndsWith("Dto")).ToList();	
     }
+
+
 
 
     // Finds the matching CQRS contract class for an API contract class

@@ -5,10 +5,11 @@ VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "T4", "T4", "{2CA72A91-BE99-432D-B63F-0EADAFA01FBF}"
 	ProjectSection(SolutionItems) = preProject
-		T4\BuilderGenerationTemplates.tt = T4\BuilderGenerationTemplates.tt
-		T4\GetClassesHelperMethods.tt = T4\GetClassesHelperMethods.tt
-		T4\MapperTemplates.tt = T4\MapperTemplates.tt
-		T4\UnitTestTemplates.tt = T4\UnitTestTemplates.tt
+		T4\Templates-Builder.tt = T4\Templates-Builder.tt
+		T4\Templates-Mapper.tt = T4\Templates-Mapper.tt
+		T4\Templates-UnitTests.tt = T4\Templates-UnitTests.tt
+		T4\Utilities-Classes.tt = T4\Utilities-Classes.tt
+		T4\Utilities-Project.tt = T4\Utilities-Project.tt
 		T4\Utilities.tt = T4\Utilities.tt
 	EndProjectSection
 EndProject
@@ -38,9 +39,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IntegrationTests", "IntegrationTests", "{9595145A-3E72-4E40-BA9E-CA35E5469EAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pdbc.Shopping.UnitTests", "Tests\Pdbc.Shopping.UnitTests\Pdbc.Shopping.UnitTests.csproj", "{678C91F4-EF11-45F8-BF42-32F2B72011B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pdbc.Shopping.UnitTests", "Tests\Pdbc.Shopping.UnitTests\Pdbc.Shopping.UnitTests.csproj", "{678C91F4-EF11-45F8-BF42-32F2B72011B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pdbc.Shopping.I18N", "Pdbc.Shopping.I18N\Pdbc.Shopping.I18N.csproj", "{FA46B83D-7495-43E0-949A-F721E3E50EB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pdbc.Shopping.I18N", "Pdbc.Shopping.I18N\Pdbc.Shopping.I18N.csproj", "{FA46B83D-7495-43E0-949A-F721E3E50EB2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pdbc.Shopping.Core", "Pdbc.Shopping.Core\Pdbc.Shopping.Core.csproj", "{2E89D2BA-06EF-4EE6-A90C-5779FBE615A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,6 +75,10 @@ Global
 		{FA46B83D-7495-43E0-949A-F721E3E50EB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA46B83D-7495-43E0-949A-F721E3E50EB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA46B83D-7495-43E0-949A-F721E3E50EB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E89D2BA-06EF-4EE6-A90C-5779FBE615A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E89D2BA-06EF-4EE6-A90C-5779FBE615A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E89D2BA-06EF-4EE6-A90C-5779FBE615A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E89D2BA-06EF-4EE6-A90C-5779FBE615A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

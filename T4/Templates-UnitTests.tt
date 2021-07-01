@@ -10,7 +10,6 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Reflection" #>
 <#+ 
-
 <#+
 public void GenerateMapperTestHelper(string ns, EnvDTE.CodeClass requestClass,  List<EnvDTE.CodeClass> requestClasses, EnvDTE.CodeClass cqrsClass, List<EnvDTE.CodeClass> cqrsClasses) 
  {   
