@@ -1,5 +1,17 @@
 ﻿- name: Introduction
   href: intro.md
 
-- name: Vocabulary
-  href: vocabulary.md
+- name: Domain Classes
+  href: domain-classes.md
+
+- name: Builders & Test Data Builder
+  href: data-builder.md
+
+- name: Data & Entity Framework
+  href: data-entity-framework.md
+
+- name: T4 Templates
+  href: t4-templates.md
+
+- name: I18N & Localization
+  href: i18n-Localization.md  

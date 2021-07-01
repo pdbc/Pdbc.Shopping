@@ -6,4 +6,5 @@ All relevant articles are listed here:
 * [Builders & Test Data Builder](../data-builder.md)
 * [Data & Entity Framework](../data-entity-framework.md)
 * [T4 Templates](../t4-templates.md)
+* [I18N Localization](../i18n-localization.md)
 
