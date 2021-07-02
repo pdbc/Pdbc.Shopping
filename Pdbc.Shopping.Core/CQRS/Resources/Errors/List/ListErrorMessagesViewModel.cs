@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Pdbc.Shopping.Core.CQRS.Resources.ErrorMessages.List
+namespace Pdbc.Shopping.Core.CQRS.Resources.Errors.List
 {
     public class ListErrorMessagesViewModel
     {

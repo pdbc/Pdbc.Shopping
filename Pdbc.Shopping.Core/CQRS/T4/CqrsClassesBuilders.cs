@@ -8,6 +8,9 @@
 using System;
 using System.Linq;
 using Pdbc.Shopping.Common;
+using Pdbc.Shopping.Core.CQRS.Resources.Errors.Get;
+using Pdbc.Shopping.Core.CQRS.Resources.Errors.List;
+
 namespace Pdbc.Shopping.Core.CQRS.Health.DependencyCheck {
     public partial class DependencyCheckQueryBuilder : ObjectBuilder<Pdbc.Shopping.Core.CQRS.Health.DependencyCheck.DependencyCheckQuery>
 	{
@@ -69,7 +72,7 @@ public override LifelineCheckViewModel Build()
 }
 
 namespace Pdbc.Shopping.Core.CQRS.Resources.ErrorMessages.Get {
-    public partial class GetErrorMessageQueryBuilder : ObjectBuilder<Pdbc.Shopping.Core.CQRS.Resources.ErrorMessages.Get.GetErrorMessageQuery>
+    public partial class GetErrorMessageQueryBuilder : ObjectBuilder<GetErrorMessageQuery>
 	{
        protected System.String Language { get; set; }		
 public GetErrorMessageQueryBuilder WithLanguage(System.String language)
@@ -102,7 +105,7 @@ public override GetErrorMessageQuery Build()
 }
 
 namespace Pdbc.Music.Core.CQRS.ErrorMessages.Get {
-    public partial class GetErrorMessageViewModelBuilder : ObjectBuilder<Pdbc.Music.Core.CQRS.ErrorMessages.Get.GetErrorMessageViewModel>
+    public partial class GetErrorMessageViewModelBuilder : ObjectBuilder<GetErrorMessageViewModel>
 	{
        protected System.String Message { get; set; }		
 public GetErrorMessageViewModelBuilder WithMessage(System.String message)
@@ -126,7 +129,7 @@ public override GetErrorMessageViewModel Build()
 }
 
 namespace Pdbc.Shopping.Core.CQRS.Resources.ErrorMessages.List {
-    public partial class ListErrorMessagesQueryBuilder : ObjectBuilder<Pdbc.Shopping.Core.CQRS.Resources.ErrorMessages.List.ListErrorMessagesQuery>
+    public partial class ListErrorMessagesQueryBuilder : ObjectBuilder<ListErrorMessagesQuery>
 	{
        protected System.String Language { get; set; }		
 public ListErrorMessagesQueryBuilder WithLanguage(System.String language)
@@ -150,7 +153,7 @@ public override ListErrorMessagesQuery Build()
 }
 
 namespace Pdbc.Shopping.Core.CQRS.Resources.ErrorMessages.List {
-    public partial class ListErrorMessagesViewModelBuilder : ObjectBuilder<Pdbc.Shopping.Core.CQRS.Resources.ErrorMessages.List.ListErrorMessagesViewModel>
+    public partial class ListErrorMessagesViewModelBuilder : ObjectBuilder<ListErrorMessagesViewModel>
 	{
        protected System.Collections.Generic.IDictionary<System.String, System.String> Resources { get; set; }		
 public ListErrorMessagesViewModelBuilder WithResources(System.Collections.Generic.IDictionary<System.String, System.String> resources)

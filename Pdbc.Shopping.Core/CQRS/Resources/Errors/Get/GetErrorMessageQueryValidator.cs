@@ -1,9 +1,8 @@
 ﻿using FluentValidation;
-using Pdbc.Music.Core.CQRS.ErrorMessages.Get;
 using Pdbc.Shopping.Core.Validation;
 using Pdbc.Shopping.I18N;
 
-namespace Pdbc.Shopping.Core.CQRS.Resources.ErrorMessages.Get
+namespace Pdbc.Shopping.Core.CQRS.Resources.Errors.Get
 {
     public class GetErrorMessageQueryValidator : FluentValidationValidator<GetErrorMessageQuery>, IValidationBagValidator<GetErrorMessageQuery>
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Pdbc.Music.Core.CQRS.ErrorMessages.Get
+namespace Pdbc.Shopping.Core.CQRS.Resources.Errors.Get
 {
     public class GetErrorMessageViewModel
     {

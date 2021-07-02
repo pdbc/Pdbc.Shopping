@@ -3,6 +3,7 @@ using Moq;
 using NUnit.Framework;
 using Pdbc.Music.Core.CQRS.ErrorMessages.Get;
 using Pdbc.Shopping.Core.CQRS.Resources.ErrorMessages.Get;
+using Pdbc.Shopping.Core.CQRS.Resources.Errors.Get;
 using Pdbc.Shopping.Tests.Helpers;
 using Pdbc.Shopping.Tests.Helpers.Core.CQRS.Resources.ErrorMessages;
 using Pdbc.Shopping.Tests.Helpers.Extensions;

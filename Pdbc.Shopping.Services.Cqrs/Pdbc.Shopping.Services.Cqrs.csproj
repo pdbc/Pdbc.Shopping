@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="T4\**" />
+    <EmbeddedResource Remove="T4\**" />
+    <None Remove="T4\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Pdbc.Shopping.Api.Contracts\Pdbc.Shopping.Api.Contracts.csproj" />
+    <ProjectReference Include="..\Pdbc.Shopping.Core\Pdbc.Shopping.Core.csproj" />
+  </ItemGroup>
+
+</Project>
