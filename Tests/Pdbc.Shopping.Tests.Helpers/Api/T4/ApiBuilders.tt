@@ -1,0 +1,41 @@
+﻿<#@ template language="C#" debug="false" hostspecific="true" #>
+<#@ output extension=".cs" #>
+<#@ assembly name="System" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity" #>
+<#@ assembly name="EnvDTE" #>
+
+<#@ import namespace="EnvDTE" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Reflection" #>
+
+<#@ include file="$(SolutionDir)T4\Utilities-Project.tt" #>
+<#@ include file="$(SolutionDir)T4\Utilities-Classes.tt" #>
+<#@ include file="$(SolutionDir)T4\Utilities.tt" #>
+
+<#@ include file="$(SolutionDir)T4\Templates-Builder.tt" #>
+<#
+
+    var project = GetProjectByName("Pdbc.Shopping.Api.Contracts");
+    var classes = GetApiContractClasses(project); 
+
+    // classes.AddRange(GetApiContractClasses(GetProjectByName("Pdbc.Shopping.Api.Common.Contracts")));   
+#>
+using System;
+using System.Linq;
+
+using Pdbc.Shopping.Common;
+<# 
+	foreach(var c in classes)
+	{        
+		// Setup the variables that will be used throughout the script for this particular class	
+        var className = c.Name;
+        var classNamespace = c.Namespace.Name;
+        var properties = GetAllPropertiesAndInheritedProperties(c, classes);
+        
+        GenerateObjectBuilderTemplate(className, classNamespace, properties, classes);
+    }
+#>

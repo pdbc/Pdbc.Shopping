@@ -64,3 +64,6 @@ private static IDictionary<string, string> CreateSpecificResourceData(this Resou
     return new Dictionary<string, string>(data, comparer);
 }
 ```
+
+## Translations
+In order to kickstart translations [DeepL](https://www.deepl.com/translator) might be good starting point.  

@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Pdbc.Shopping.Api.Contracts\Pdbc.Shopping.Api.Contracts.csproj" />
+    <ProjectReference Include="..\..\Pdbc.Shopping.Data\Pdbc.Shopping.Data.csproj" />
+    <ProjectReference Include="..\Pdbc.Shopping.Tests.Helpers\Pdbc.Shopping.Tests.Helpers.csproj" />
+  </ItemGroup>
+
+</Project>
