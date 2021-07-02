@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Pdbc.Shopping.Core\Pdbc.Shopping.Core.csproj" />
+    <ProjectReference Include="..\..\Pdbc.Shopping.Services.Cqrs\Pdbc.Shopping.Services.Cqrs.csproj" />
     <ProjectReference Include="..\Pdbc.Shopping.Tests.Helpers\Pdbc.Shopping.Tests.Helpers.csproj" />
   </ItemGroup>
 

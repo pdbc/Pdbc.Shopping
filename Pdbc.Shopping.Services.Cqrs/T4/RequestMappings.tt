@@ -10,46 +10,20 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Reflection" #>
+<#@ include file="$(SolutionDir)T4\Utilities-Classes.tt" #>
+<#@ include file="$(SolutionDir)T4\Utilities-Project.tt" #>
 <#@ include file="$(SolutionDir)T4\Utilities.tt" #>
-<#@ include file="$(SolutionDir)T4\MapperTemplates.tt" #>
+<#@ include file="$(SolutionDir)T4\Templates-Mapper.tt" #>
 <#
-    var nsRequests = "Pdbc.Music.Api.Mappings.Requests";
-    var nsEntities = "Pdbc.Music.Api.Mappings.Entities";
+    // var nsRequests = "Pdbc.Shopping.Api.Mappings.Requests";
+    // var nsEntities = "Pdbc.Shopping.Api.Mappings.Entities";
 
     // Setup variables for using throughout the script.
-    var cqrsProject = GetProjectByName("Pdbc.Music.Core");
+    var cqrsProject = GetProjectByName("Pdbc.Shopping.Core");
     var cqrsClasses = GetCqrsClasses(cqrsProject); 
 
-    var apiContractProject = GetProjectByName("Pdbc.Music.Api.Contracts");
+    var apiContractProject = GetProjectByName("Pdbc.Shopping.Api.Contracts");
     var apiContractClasses = GetApiContractClasses(apiContractProject); 
+
+    GenerateRequestCqrsMappings(apiContractClasses, cqrsClasses);
 #>
-using System;
-using System.Linq;
-
-using AutoMapper;
-
-public class RequestToCqrsMappings : Profile
-{
-    public RequestToCqrsMappings()
-    {
-        <#
-        foreach(var contractClass in apiContractClasses)
-        {   
-            var matchingCqrsName = GetMatchingCqrsClassNameFor(contractClass);            
-            foreach(var cqrsClass in cqrsClasses)
-            {    
-            #>
-
-            // <#= contractClass.Name #> <#= matchingCqrsName #>
-<#
-    if (cqrsClass.Name == matchingCqrsName)
-    {
-        GenerateRequestCqrsMapperConfiguration(contractClass.Name, contractClass, cqrsClass);break;
-    }
-}
-            #>
-        <# 
-        }
-        #>
-    }
-}

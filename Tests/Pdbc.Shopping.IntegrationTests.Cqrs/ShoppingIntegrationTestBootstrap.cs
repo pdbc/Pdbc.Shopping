@@ -12,9 +12,8 @@ namespace Pdbc.Shopping.IntegrationTests.Cqrs
         public static void BootstrapContainer(IServiceCollection services, 
                                               IConfiguration configuration)
         {
-            //services.AddAutoMapper(typeof(RequestToCqrsMappings));
-
-
+            services.AddAutoMapper(typeof(RequestToCqrsMappings));
+            
             services.RegisterModule<ShoppingCoreModule>(configuration);
             services.RegisterModule<MusicCqrsServicesModule>(configuration);
             services.RegisterModule<ShoppingDataModule>(configuration);

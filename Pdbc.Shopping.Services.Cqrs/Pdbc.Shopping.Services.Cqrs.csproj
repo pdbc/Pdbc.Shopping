@@ -5,14 +5,27 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="T4\**" />
-    <EmbeddedResource Remove="T4\**" />
-    <None Remove="T4\**" />
+    <ProjectReference Include="..\Pdbc.Shopping.Api.Contracts\Pdbc.Shopping.Api.Contracts.csproj" />
+    <ProjectReference Include="..\Pdbc.Shopping.Core\Pdbc.Shopping.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Pdbc.Shopping.Api.Contracts\Pdbc.Shopping.Api.Contracts.csproj" />
-    <ProjectReference Include="..\Pdbc.Shopping.Core\Pdbc.Shopping.Core.csproj" />
+    <None Update="T4\RequestMappings.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>RequestMappings.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="T4\RequestMappings.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>RequestMappings.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>
