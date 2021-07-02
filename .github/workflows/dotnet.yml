@@ -21,6 +21,6 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
-    - name: Test
+    - name: UnitTest
       run: dotnet test Tests/Pdbc.Shopping.UnitTests/Pdbc.Shopping.UnitTests.csproj 
 
