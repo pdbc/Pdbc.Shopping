@@ -1,6 +1,6 @@
 ﻿namespace Pdbc.Shopping.Core.CQRS.Health.LifelineCheck
 {
-    public class LifelineCheckViewModel
+    public class LifelineCheckResult
     {
 
     }

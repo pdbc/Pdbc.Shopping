@@ -3,7 +3,7 @@ using Pdbc.Shopping.Integration.Tests;
 using Pdbc.Shopping.Integration.Tests.Health.LifelineCheck;
 using Pdbc.Shopping.Services.Cqrs.Interfaces;
 
-namespace Pdbc.Shopping.IntegrationTests.Cqrs.HealthCheck.IsServiceRunning
+namespace Pdbc.Shopping.IntegrationTests.Cqrs.HealthCheck.LifelineCheck
 {
     public class LifelineCheckTestFixture : ShoppingIntegrationCqrsRequestTestFixture
     {

@@ -19,8 +19,8 @@ namespace Pdbc.Shopping.Services.Cqrs
 
         public async Task<LifelineCheckResponse> LifelineCheck(LifelineCheckRequest request)
         {
-            return await Query<LifelineCheckRequest, LifelineCheckQuery,
-                               LifelineCheckViewModel, LifelineCheckResponse>(request);
+            return await Query<LifelineCheckRequest, LifelineCheckCommand,
+                               LifelineCheckResult, LifelineCheckResponse>(request);
         }
     }
 }

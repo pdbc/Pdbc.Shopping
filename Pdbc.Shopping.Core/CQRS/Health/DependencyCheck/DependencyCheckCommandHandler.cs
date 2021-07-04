@@ -5,11 +5,11 @@ using Pdbc.Shopping.Core.CQRS.Health.LifelineCheck;
 
 namespace Pdbc.Shopping.Core.CQRS.Health.DependencyCheck
 {
-    public class DependencyCheckQueryHandler : IRequestHandler<DependencyCheckQuery, DependencyCheckViewModel>
+    public class DependencyCheckCommandHandler : IRequestHandler<DependencyCheckCommand, DependencyCheckResult>
     {
-        public Task<DependencyCheckViewModel> Handle(DependencyCheckQuery request, CancellationToken cancellationToken)
+        public Task<DependencyCheckResult> Handle(DependencyCheckCommand request, CancellationToken cancellationToken)
         {
-            var result = new DependencyCheckViewModel()
+            var result = new DependencyCheckResult()
             {
             };
 

@@ -51,52 +51,19 @@ public class RequestToCqrsMappings : Profile
 // ShoppingResponse ShoppingResult
           
 // DependencyCheckRequest DependencyCheckCommand
-  
-// DependencyCheckRequest DependencyCheckCommand
-  
-// DependencyCheckRequest DependencyCheckCommand
-  
-// DependencyCheckRequest DependencyCheckCommand
-  
-// DependencyCheckRequest DependencyCheckCommand
-  
-// DependencyCheckRequest DependencyCheckCommand
-  
-// DependencyCheckRequest DependencyCheckCommand
-  
-// DependencyCheckRequest DependencyCheckCommand
+CreateMap<Pdbc.Shopping.Api.Contracts.Requests.Health.DependencyCheckRequest, Pdbc.Shopping.Core.CQRS.Health.DependencyCheck.DependencyCheckCommand>();
           
 // DependencyCheckResponse DependencyCheckResult
   
 // DependencyCheckResponse DependencyCheckResult
-  
-// DependencyCheckResponse DependencyCheckResult
-  
-// DependencyCheckResponse DependencyCheckResult
-  
-// DependencyCheckResponse DependencyCheckResult
-  
-// DependencyCheckResponse DependencyCheckResult
-  
-// DependencyCheckResponse DependencyCheckResult
-  
-// DependencyCheckResponse DependencyCheckResult
+CreateMap<Pdbc.Shopping.Core.CQRS.Health.DependencyCheck.DependencyCheckResult, Pdbc.Shopping.Api.Contracts.Requests.Health.DependencyCheckResponse>();
           
 // LifelineCheckRequest LifelineCheckCommand
   
 // LifelineCheckRequest LifelineCheckCommand
   
 // LifelineCheckRequest LifelineCheckCommand
-  
-// LifelineCheckRequest LifelineCheckCommand
-  
-// LifelineCheckRequest LifelineCheckCommand
-  
-// LifelineCheckRequest LifelineCheckCommand
-  
-// LifelineCheckRequest LifelineCheckCommand
-  
-// LifelineCheckRequest LifelineCheckCommand
+CreateMap<Pdbc.Shopping.Api.Contracts.Requests.Health.LifelineCheckRequest, Pdbc.Shopping.Core.CQRS.Health.LifelineCheck.LifelineCheckCommand>();
           
 // LifelineCheckResponse LifelineCheckResult
   
@@ -105,14 +72,7 @@ public class RequestToCqrsMappings : Profile
 // LifelineCheckResponse LifelineCheckResult
   
 // LifelineCheckResponse LifelineCheckResult
-  
-// LifelineCheckResponse LifelineCheckResult
-  
-// LifelineCheckResponse LifelineCheckResult
-  
-// LifelineCheckResponse LifelineCheckResult
-  
-// LifelineCheckResponse LifelineCheckResult
+CreateMap<Pdbc.Shopping.Core.CQRS.Health.LifelineCheck.LifelineCheckResult, Pdbc.Shopping.Api.Contracts.Requests.Health.LifelineCheckResponse>();
           
 // GetErrorMessageRequest GetErrorMessageQuery
   

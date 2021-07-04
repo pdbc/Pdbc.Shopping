@@ -68,9 +68,10 @@
         return GetClassesOf(project).Where(c => 
 				// Specify the name prefixes
 				(
-                    c.Name.EndsWith("Query") ||
+                    c.Name.EndsWith("Query") ||                    
+                    c.Name.EndsWith("Command") ||
                     c.Name.EndsWith("ViewModel") ||
-                    c.Name.EndsWith("Command")
+                    c.Name.EndsWith("Result")
 
                 )  &&
                 
@@ -96,8 +97,7 @@
         var name = GetSpecificNameFromClass(c);
 
         var isGetRequest = c.Name.StartsWith("Get") || 
-                           c.Name.StartsWith("List") || 
-                           c.Name.StartsWith("IsServiceRunning") ;
+                           c.Name.StartsWith("List") ;
        
 
         if (c.Name.EndsWith("Request")) {

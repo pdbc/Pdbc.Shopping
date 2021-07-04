@@ -1,6 +1,6 @@
 ﻿namespace Pdbc.Shopping.Core.CQRS.Health.LifelineCheck
 {
-    public class LifelineCheckQuery : IQuery<LifelineCheckViewModel>
+    public class LifelineCheckCommand : IQuery<LifelineCheckResult>
     {
        
     }

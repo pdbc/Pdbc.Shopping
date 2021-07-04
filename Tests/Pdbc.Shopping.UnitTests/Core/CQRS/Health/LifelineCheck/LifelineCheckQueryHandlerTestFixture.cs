@@ -11,23 +11,23 @@ using Pdbc.Shopping.Tests.Helpers.Extensions;
 namespace Pdbc.Shopping.UnitTests.Core.CQRS.Health.LifelineCheck
 {
     [TestFixture]
-    public class LifelineCheckQueryHandlerTestFixture : ContextSpecification<LifelineCheckQueryHandler>
+    public class LifelineCheckQueryHandlerTestFixture : ContextSpecification<LifelineCheckCommandHandler>
     {
         private CancellationToken _cancelationToken;
-        protected LifelineCheckQuery Query { get; set; }
+        protected LifelineCheckCommand Command { get; set; }
 
-        protected LifelineCheckViewModel Result { get; set; }
+        protected LifelineCheckResult Result { get; set; }
         protected override void Establish_context()
         {
             base.Establish_context();
             _cancelationToken = new CancellationToken();
 
-            Query = new LifelineCheckQueryTestDataBuilder().Build();
+            Command = new LifelineCheckQueryTestDataBuilder().Build();
         }
 
         protected override void Because()
         {
-            Result = SUT.Handle(Query, _cancelationToken)
+            Result = SUT.Handle(Command, _cancelationToken)
                 .GetAwaiter()
                 .GetResult();
         }

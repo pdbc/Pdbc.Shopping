@@ -12,13 +12,13 @@ using Pdbc.Shopping.Core.CQRS.Resources.Errors.Get;
 using Pdbc.Shopping.Core.CQRS.Resources.Errors.List;
 
 namespace Pdbc.Shopping.Core.CQRS.Health.DependencyCheck {
-    public partial class DependencyCheckQueryBuilder : ObjectBuilder<Pdbc.Shopping.Core.CQRS.Health.DependencyCheck.DependencyCheckQuery>
+    public partial class DependencyCheckQueryBuilder : ObjectBuilder<Pdbc.Shopping.Core.CQRS.Health.DependencyCheck.DependencyCheckCommand>
 	{
        
        
-public override DependencyCheckQuery Build()
+public override DependencyCheckCommand Build()
 {
-    var item = (DependencyCheckQuery)Activator.CreateInstance(typeof(DependencyCheckQuery));
+    var item = (DependencyCheckCommand)Activator.CreateInstance(typeof(DependencyCheckCommand));
     
     return item;
 }
@@ -27,13 +27,13 @@ public override DependencyCheckQuery Build()
 }
 
 namespace Pdbc.Shopping.Core.CQRS.Health.DependencyCheck {
-    public partial class DependencyCheckViewModelBuilder : ObjectBuilder<Pdbc.Shopping.Core.CQRS.Health.DependencyCheck.DependencyCheckViewModel>
+    public partial class DependencyCheckViewModelBuilder : ObjectBuilder<Pdbc.Shopping.Core.CQRS.Health.DependencyCheck.DependencyCheckResult>
 	{
        
        
-public override DependencyCheckViewModel Build()
+public override DependencyCheckResult Build()
 {
-    var item = (DependencyCheckViewModel)Activator.CreateInstance(typeof(DependencyCheckViewModel));
+    var item = (DependencyCheckResult)Activator.CreateInstance(typeof(DependencyCheckResult));
     
     return item;
 }
@@ -42,13 +42,13 @@ public override DependencyCheckViewModel Build()
 }
 
 namespace Pdbc.Shopping.Core.CQRS.Health.LifelineCheck {
-    public partial class LifelineCheckQueryBuilder : ObjectBuilder<Pdbc.Shopping.Core.CQRS.Health.LifelineCheck.LifelineCheckQuery>
+    public partial class LifelineCheckQueryBuilder : ObjectBuilder<Pdbc.Shopping.Core.CQRS.Health.LifelineCheck.LifelineCheckCommand>
 	{
        
        
-public override LifelineCheckQuery Build()
+public override LifelineCheckCommand Build()
 {
-    var item = (LifelineCheckQuery)Activator.CreateInstance(typeof(LifelineCheckQuery));
+    var item = (LifelineCheckCommand)Activator.CreateInstance(typeof(LifelineCheckCommand));
     
     return item;
 }
@@ -57,13 +57,13 @@ public override LifelineCheckQuery Build()
 }
 
 namespace Pdbc.Shopping.Core.CQRS.Health.LifelineCheck {
-    public partial class LifelineCheckViewModelBuilder : ObjectBuilder<Pdbc.Shopping.Core.CQRS.Health.LifelineCheck.LifelineCheckViewModel>
+    public partial class LifelineCheckViewModelBuilder : ObjectBuilder<Pdbc.Shopping.Core.CQRS.Health.LifelineCheck.LifelineCheckResult>
 	{
        
        
-public override LifelineCheckViewModel Build()
+public override LifelineCheckResult Build()
 {
-    var item = (LifelineCheckViewModel)Activator.CreateInstance(typeof(LifelineCheckViewModel));
+    var item = (LifelineCheckResult)Activator.CreateInstance(typeof(LifelineCheckResult));
     
     return item;
 }
