@@ -1,13 +1,15 @@
 ﻿using Pdbc.Shopping.Api.Contracts.Requests.Errors;
 using Pdbc.Shopping.Api.Contracts.Services;
 using Pdbc.Shopping.Data;
+using Pdbc.Shopping.I18N;
+using Pdbc.Shopping.Integration.Tests.ErrorMessages;
 using Pdbc.Shopping.Tests.Helpers.Extensions;
 
-namespace Pdbc.Shopping.Integration.Tests.ErrorMessages.Get
+namespace Pdbc.Shopping.Integration.Tests.Errors.Get
 {
-    public class GetErrorMessageWithoutLanguageTest : ErrorMessageServiceTest<GetErrorMessageResponse>
+    public class GetErrorMessageTest : ErrorMessageServiceTest<GetErrorMessageResponse>
     {
-        public GetErrorMessageWithoutLanguageTest(IErrorMessagesService service, ShoppingDbContext dbContext) 
+        public GetErrorMessageTest(IErrorMessagesService service, ShoppingDbContext dbContext) 
             : base(service, dbContext)
         {
         }
@@ -18,8 +20,8 @@ namespace Pdbc.Shopping.Integration.Tests.ErrorMessages.Get
         {
             _request = new GetErrorMessageRequest()
             {
-                Key = "ErrorCode_Sample",
-                Language = ""
+                Key = nameof(ErrorResources.LanguageIsEmpty),
+                Language = "NL"
             };
         }
 
@@ -36,8 +38,8 @@ namespace Pdbc.Shopping.Integration.Tests.ErrorMessages.Get
 
         public override void VerifyResponse(GetErrorMessageResponse response)
         {
-            response.Message.ShouldBeNull();
-            response.Notifications.HasErrors().ShouldBeTrue();
+            response.Message.ShouldNotBeNull();
+            response.Message.ShouldNotBeEmpty();
         }
     }
 }

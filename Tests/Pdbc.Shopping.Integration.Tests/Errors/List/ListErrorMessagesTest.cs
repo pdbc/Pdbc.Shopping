@@ -1,9 +1,10 @@
 ﻿using Pdbc.Shopping.Api.Contracts.Requests.Resources.Errors;
 using Pdbc.Shopping.Api.Contracts.Services;
 using Pdbc.Shopping.Data;
+using Pdbc.Shopping.Integration.Tests.ErrorMessages;
 using Pdbc.Shopping.Tests.Helpers.Extensions;
 
-namespace Pdbc.Shopping.Integration.Tests.ErrorMessages.List
+namespace Pdbc.Shopping.Integration.Tests.Errors.List
 {
     public class ListErrorMessagesTest : ErrorMessageServiceTest<ListErrorMessagesResponse>
     {
