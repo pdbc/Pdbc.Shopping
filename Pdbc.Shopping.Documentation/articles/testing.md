@@ -18,6 +18,10 @@ Integration tests takes the system a whole, setup the data and use the system as
 
 > CQRS vs API tests: in an ideal world you will write one test and you can verify the same test and scenario directly on your CQRS code and on your API layer (including serialization, authorization handing, ...)
 
+You can opt for two cases of API tests, in-hosts tests where you will setup a webserver inside your (base) test class and connect with that one.  Or actually deploy the web-api and connect to the deployed application.  Both have advantages/disadvantages.  
+* test-host: faster, but less reliable (other network components like web firewall, reverse proxy, ...)
+* deployed: as it is in 'production', but requires a deployed version. Later in the release pipeline.
+
 ## Front-End Tests
 
 The ultimate tests (but also the most brittle and error-prone) tests are the tests as the end-user experiences the application.  Usually this is in the form of a web-application or device application.  Automating these flows gives us the advantages that even the rendering of the screens, the availabilty of buttons & text boxes can be validated.  If these test work, it means the end-user can certainly do his job with the application.

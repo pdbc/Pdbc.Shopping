@@ -12,6 +12,7 @@ using Pdbc.Shopping.Api.Common.Extensions;
 using Pdbc.Shopping.Common.Extensions;
 using Pdbc.Shopping.Core;
 using Pdbc.Shopping.Data;
+using Pdbc.Shopping.Services.Cqrs;
 
 namespace Pdbc.Shopping.Api.Backend
 {
@@ -54,9 +55,12 @@ namespace Pdbc.Shopping.Api.Backend
 
             //services.AddAuthentication("Basic").AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("Basic", null);
 
+            services.AddAutoMapper(typeof(RequestToCqrsMappings));
 
             services.RegisterModule<ShoppingDataModule>(Configuration);
             services.RegisterModule<ShoppingCoreModule>(Configuration);
+            services.RegisterModule<MusicCqrsServicesModule>(Configuration);
+
 
             //services.RegisterModule<MusicCqrsServicesModule>(Configuration);
             //services.AddAutoMapper(typeof(RequestToCqrsMappings));
