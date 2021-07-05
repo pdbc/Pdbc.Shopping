@@ -16,7 +16,7 @@ using Pdbc.Shopping.Tests.Helpers;
 namespace Pdbc.Shopping.IntegrationTests.Api
 {
     /// <inheritdoc />
-    public abstract class MusicIntegrationApiRequestTestFixture : BaseSpecification
+    public abstract class ShoppingIntegrationApiRequestTestFixture : BaseSpecification
     {
         protected ShoppingDbContext Context;
 

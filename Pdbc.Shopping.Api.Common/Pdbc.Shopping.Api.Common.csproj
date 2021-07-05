@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\ErrorMessagesController.cs" />
-    <Compile Remove="Controllers\HealthCheckController.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Pdbc.Shopping.Api.Contracts\Pdbc.Shopping.Api.Contracts.csproj" />
+    <ProjectReference Include="..\Pdbc.Shopping.Services.Cqrs\Pdbc.Shopping.Services.Cqrs.csproj" />
   </ItemGroup>
 
 </Project>

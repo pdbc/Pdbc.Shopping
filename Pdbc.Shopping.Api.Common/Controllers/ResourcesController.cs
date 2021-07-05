@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Pdbc.Shopping.Api.Contracts.Requests.Errors;
 using Pdbc.Shopping.Api.Contracts.Requests.Resources.Errors;
 using Pdbc.Shopping.Api.Contracts.Services;
+using Pdbc.Shopping.Services.Cqrs.Interfaces;
 
 namespace Pdbc.Shopping.Api.Common.Controllers
 {
@@ -15,12 +16,12 @@ namespace Pdbc.Shopping.Api.Common.Controllers
     [ApiController]
     public class ResourcesController : ShoppingBaseController
     {
-        private readonly IErrorMessagesService _errorMessagesService;
+        private readonly IErrorMessagesCqrsService _errorMessagesService;
 
-        //public ResourcesController(IErrorMessagesCqrsService errorMessagesService)
-        //{
-        //    _errorMessagesService = errorMessagesService;
-        //}
+        public ResourcesController(IErrorMessagesCqrsService errorMessagesService)
+        {
+            _errorMessagesService = errorMessagesService;
+        }
 
 
         /// <summary>

@@ -32,7 +32,7 @@ namespace Pdbc.Shopping.Api.ServiceAgent
         /// <param name="configuration"></param>
         public ShoppingApiServiceAgentConfiguration(IConfiguration configuration)
         {
-            configuration.GetSection("serviceagent:musicApi").Bind(this);
+            configuration.GetSection("serviceagent:shoppingapi").Bind(this);
         }
 
         public string Name { get; set; }

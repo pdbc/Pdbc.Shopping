@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Serialization;
+using Pdbc.Shopping.Api.Common.Controllers;
 using Pdbc.Shopping.Api.Common.Extensions;
 using Pdbc.Shopping.Common.Extensions;
 using Pdbc.Shopping.Core;
@@ -70,7 +71,7 @@ namespace Pdbc.Shopping.Api.Backend
                 options.ConfigureSwaggerDocumentationAssemblies(new[]
                 {
                     Assembly.GetExecutingAssembly(),
-                    //Assembly.GetAssembly(typeof(HealthCheckController)),
+                    Assembly.GetAssembly(typeof(ResourcesController)),
                 });
 
                 // TODO Common somewhere - Add filters to fix enums

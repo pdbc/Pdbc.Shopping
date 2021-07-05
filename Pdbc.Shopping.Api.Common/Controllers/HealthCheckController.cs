@@ -1,17 +1,28 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Pdbc.Shopping.Api.Contracts.Requests.Health;
+using Pdbc.Shopping.Services.Cqrs.Interfaces;
 
 namespace Pdbc.Shopping.Api.Common.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class HealthCheckController : MusicBaseController
+    public class HealthController : ShoppingBaseController
     {
-        [HttpGet(Name = nameof(IsRunning))]
-        public async Task<ActionResult<String>> IsRunning()
+        private readonly IHealthCheckCqrsService _healthCheckCqrsService;
+
+        public HealthController(IHealthCheckCqrsService healthCheckCqrsService)
         {
-            return await Task.FromResult(Ok("Running correct"));
+            _healthCheckCqrsService = healthCheckCqrsService;
+        }
+
+
+        [HttpGet(Name = nameof(LifelineCheck))]
+        public async Task<ActionResult<String>> LifelineCheck()
+        {
+            var response = await _healthCheckCqrsService.LifelineCheck(new LifelineCheckRequest());
+            return Ok(response);
         }
     }
 }
