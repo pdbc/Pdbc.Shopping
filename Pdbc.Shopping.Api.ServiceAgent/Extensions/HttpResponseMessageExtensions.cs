@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Pdbc.Shopping.Api.ServiceAgent.Exceptions;
+using Pdbc.Shopping.I18N;
 
 namespace Pdbc.Shopping.Api.ServiceAgent.Extensions
 {
@@ -58,11 +59,20 @@ namespace Pdbc.Shopping.Api.ServiceAgent.Extensions
             HttpStatusCode statusCode = HttpStatusCode.InternalServerError)
         {
 
-            var r = await response.Content.ReadAsStringAsync()
+            var body = await response.Content.ReadAsStringAsync()
                 .ConfigureAwait(false);
 
+
+            if (statusCode == HttpStatusCode.InternalServerError)
+            {
+                throw new ServiceAgentException(statusCode, nameof(ErrorResources.UnexpectedGeneralError), body);
+            }
+
+            
             // todo add extra 
-            throw new ServiceAgentException();
+            throw new ServiceAgentException(statusCode, nameof(ErrorResources.UnexpectedGeneralError), body);
+
+
             //var requestUri = response.RequestMessage.RequestUri;
             //var requestMethod = response.RequestMessage.Method;
 
