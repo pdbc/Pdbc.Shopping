@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Pdbc.Shopping.Api.Common.Attributes;
 
 namespace Pdbc.Shopping.Api.Common.Extensions
 {
@@ -18,6 +21,30 @@ namespace Pdbc.Shopping.Api.Common.Extensions
 
                 return new BadRequestObjectResult(actionContext.ModelState);
             };
+        }
+    }
+
+    public static class ActionContextExtensions
+    {
+        /// <summary>
+        /// Skips the entity framework transaction action filter.
+        /// </summary>
+        /// <param name="actionContext">The action context.</param>
+        /// <param name="defaultTimeout"></param>
+        /// <returns></returns>
+        public static long GetTimeoutSettingsForOperation(this ActionExecutingContext actionContext, long defaultTimeout)
+        {
+            if (actionContext == null)
+                return defaultTimeout;
+
+            var attributes = actionContext.ActionDescriptor.EndpointMetadata.OfType<ActionTimeoutAttribute>().ToList();
+            if (attributes.Any())
+            {
+                var timeoutAttribute = attributes.FirstOrDefault();
+                return timeoutAttribute?.Timeout ?? defaultTimeout;
+            }
+
+            return defaultTimeout;
         }
     }
 }
