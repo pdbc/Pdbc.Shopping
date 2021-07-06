@@ -48,23 +48,23 @@ namespace Pdbc.Shopping.Api.ServiceAgent
         }
 
         /// <summary>
-        /// Posts to the WebApi service method the JSON-formatted TRequest.
+        /// Posts to the WebApi service route the JSON-formatted TRequest.
         /// If response indicates a Success or Validation status, returns the response read as TResponse.
         /// Throws an Exception with the stringified response if other HTTP status code returned.
         /// </summary>
-        public virtual Task<TResponse> PostAsync<TRequest, TResponse>(string method, TRequest request)
+        public virtual Task<TResponse> PostAsync<TRequest, TResponse>(string route, TRequest request)
         {
-            return RequestAsync<TResponse>(GetHttpClient().PostAsJsonAsync(method, request));
+            return RequestAsync<TResponse>(GetHttpClient().PostAsJsonAsync(route, request));
         }
 
         /// <summary>
-        /// Puts to the WebApi service method the JSON-formatted TRequest.
+        /// Puts to the WebApi service route the JSON-formatted TRequest.
         /// If response indicates a Succes or Validation status, returns the response read as TResponse.
         /// Throws an Exception with the stringified response if other HTTP status code returned.
         /// </summary>
-        public virtual Task<TResponse> PutAsync<TRequest, TResponse>(string method, TRequest request)
+        public virtual Task<TResponse> PutAsync<TRequest, TResponse>(string route, TRequest request)
         {
-            return RequestAsync<TResponse>(GetHttpClient().PutAsJsonAsync(method, request));
+            return RequestAsync<TResponse>(GetHttpClient().PutAsJsonAsync(route, request));
         }
 
         /// <summary>
