@@ -5,6 +5,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="CQRS\Articles\Delete\**" />
+    <Compile Remove="CQRS\Articles\Get\**" />
+    <Compile Remove="CQRS\Articles\List\**" />
+    <Compile Remove="CQRS\Articles\Update\**" />
+    <EmbeddedResource Remove="CQRS\Articles\Delete\**" />
+    <EmbeddedResource Remove="CQRS\Articles\Get\**" />
+    <EmbeddedResource Remove="CQRS\Articles\List\**" />
+    <EmbeddedResource Remove="CQRS\Articles\Update\**" />
+    <None Remove="CQRS\Articles\Delete\**" />
+    <None Remove="CQRS\Articles\Get\**" />
+    <None Remove="CQRS\Articles\List\**" />
+    <None Remove="CQRS\Articles\Update\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="CQRS\T4\CqrsClassesBuilders.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
