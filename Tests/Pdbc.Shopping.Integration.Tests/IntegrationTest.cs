@@ -39,9 +39,6 @@ namespace Pdbc.Shopping.Integration.Tests
             ResetContext();
 
             VerifyResponse(result);
-
-            // Verify immediate results
-            //Assert.IsTrue(CheckActionHasSucceeded()); // Immediate
         }
         public abstract void Cleanup();
 

@@ -14,6 +14,7 @@ namespace Pdbc.Shopping.Api.ServiceAgent
 
             serviceCollection.AddScoped<IErrorMessagesWebApiService, ErrorMessagesWebApiService>();
             serviceCollection.AddScoped<IHealthWebApiService, HealthWebApiService>();
+            serviceCollection.AddScoped<ICrashWebApiService, CrashWebApiService>();
 
             var config = new ShoppingApiServiceAgentConfiguration(configuration);
             serviceCollection.AddHttpClient(config.Name, c =>

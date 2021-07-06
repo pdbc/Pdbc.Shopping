@@ -59,10 +59,10 @@ namespace Pdbc.Shopping.Api.Backend
 
             services.RegisterModule<ShoppingDataModule>(Configuration);
             services.RegisterModule<ShoppingCoreModule>(Configuration);
-            services.RegisterModule<MusicCqrsServicesModule>(Configuration);
+            services.RegisterModule<ShoppingCqrsServicesModule>(Configuration);
 
 
-            //services.RegisterModule<MusicCqrsServicesModule>(Configuration);
+            //services.RegisterModule<ShoppingCqrsServicesModule>(Configuration);
             //services.AddAutoMapper(typeof(RequestToCqrsMappings));
 
             var serviceProvider = services.BuildServiceProvider(); //.GetService<IApiVersionDescriptionProvider>();

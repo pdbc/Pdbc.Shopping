@@ -10,6 +10,7 @@ using Pdbc.Shopping.I18N;
 
 namespace Pdbc.Shopping.Api.ServiceAgent
 {
+
     public class ErrorMessagesWebApiService : IErrorMessagesWebApiService
     {
         private string _route = "Resources/errors";

@@ -77,5 +77,14 @@ namespace Pdbc.Shopping.I18N {
                 return ResourceManager.GetString("ResourceKeyIsEmpty", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An unexpected error has occured..
+        /// </summary>
+        public static string UnexpectedGeneralError {
+            get {
+                return ResourceManager.GetString("UnexpectedGeneralError", resourceCulture);
+            }
+        }
     }
 }

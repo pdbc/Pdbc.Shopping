@@ -6,13 +6,13 @@ using Pdbc.Shopping.Services.Cqrs.Interfaces;
 
 namespace Pdbc.Shopping.Services.Cqrs
 {
-    public class MusicCqrsServicesModule : IModule
+    public class ShoppingCqrsServicesModule : IModule
     {
         public void Register(IServiceCollection serviceCollection, IConfiguration configuration)
         {
 
             //// Scan register 
-            serviceCollection.Scan(scan => scan.FromAssemblyOf<MusicCqrsServicesModule>()
+            serviceCollection.Scan(scan => scan.FromAssemblyOf<ShoppingCqrsServicesModule>()
                 .AddClasses(true)  // Get all classes implementing the IValidator<T>
                 .AsMatchingInterface()
                 .WithScopedLifetime()
@@ -21,6 +21,7 @@ namespace Pdbc.Shopping.Services.Cqrs
 
             serviceCollection.AddScoped<IErrorMessagesCqrsService, ErrorMessagesCqrsService>();
             serviceCollection.AddScoped<IErrorMessagesService, ErrorMessagesCqrsService>();
+            serviceCollection.AddScoped<ICrashCqrsService, CrashCqrsService>();
         }
     
     }

@@ -1,10 +1,6 @@
-- name: General
-  href: general/
-  topicHref: general/intro.md
-
 - name: Articles
   href: articles/
-  topicHref: articles/overview/intro.md 
+  topicHref: articles/intro.md 
 
 - name: Cookbooks
   href: Cookbooks/

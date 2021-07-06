@@ -15,7 +15,7 @@ namespace Pdbc.Shopping.IntegrationTests.Cqrs
             services.AddAutoMapper(typeof(RequestToCqrsMappings));
             
             services.RegisterModule<ShoppingCoreModule>(configuration);
-            services.RegisterModule<MusicCqrsServicesModule>(configuration);
+            services.RegisterModule<ShoppingCqrsServicesModule>(configuration);
             services.RegisterModule<ShoppingDataModule>(configuration);
         }
     }

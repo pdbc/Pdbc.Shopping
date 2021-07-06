@@ -123,4 +123,7 @@
   <data name="ResourceKeyIsEmpty" xml:space="preserve">
     <value>Resource Key is empty and is required.</value>
   </data>
+  <data name="UnexpectedGeneralError" xml:space="preserve">
+    <value>An unexpected error has occured.</value>
+  </data>
 </root>
