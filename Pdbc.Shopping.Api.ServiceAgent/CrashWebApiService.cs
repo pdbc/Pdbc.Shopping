@@ -24,9 +24,9 @@ namespace Pdbc.Shopping.Api.ServiceAgent
             await response.Deserialize<ShoppingResponse>();
         }
 
-        public Task CrashPost(int exceptionType)
+        public async Task CrashPost(int exceptionType)
         {
-            throw new NotImplementedException();
+            var response = await _proxy.PostAsync<Int32, ShoppingResponse>(_route, exceptionType);
         }
     }
 }
