@@ -13,7 +13,7 @@ namespace Pdbc.Shopping.Api.ServiceAgent
             serviceCollection.AddSingleton<IShoppingApiServiceAgentConfiguration, ShoppingApiServiceAgentConfiguration>();
 
             serviceCollection.AddScoped<IErrorMessagesWebApiService, ErrorMessagesWebApiService>();
-            serviceCollection.AddScoped<IHealthCheckWebApiService, HealthCheckWebApiService>();
+            serviceCollection.AddScoped<IHealthWebApiService, HealthWebApiService>();
 
             var config = new ShoppingApiServiceAgentConfiguration(configuration);
             serviceCollection.AddHttpClient(config.Name, c =>

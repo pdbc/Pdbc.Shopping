@@ -6,19 +6,19 @@ using Pdbc.Shopping.Api.ServiceAgent.Interfaces;
 
 namespace Pdbc.Shopping.Api.ServiceAgent
 {
-    public class HealthCheckWebApiService : IHealthCheckWebApiService
+    public class HealthWebApiService : IHealthWebApiService
     {
-        private string _route = "HealthCheck";
+        private string _route = "Health";
         private readonly WebApiClientProxy _proxy;
 
-        public HealthCheckWebApiService(IHttpClientFactory clientFactory, IShoppingApiServiceAgentConfiguration configuration)
+        public HealthWebApiService(IHttpClientFactory clientFactory, IShoppingApiServiceAgentConfiguration configuration)
         {
             _proxy = new WebApiClientProxy(clientFactory, configuration.Name);
         }
 
         public async Task<LifelineCheckResponse> LifelineCheck(LifelineCheckRequest request)
         {
-            var response = await _proxy.CallAsync(c => c.GetAsync($"{_route}/LifelineCheck"));
+            var response = await _proxy.CallAsync(c => c.GetAsync($"{_route}"));
             return await response.Deserialize<LifelineCheckResponse>();
         }
     }

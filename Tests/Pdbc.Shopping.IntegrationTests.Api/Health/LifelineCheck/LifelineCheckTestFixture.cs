@@ -9,7 +9,7 @@ namespace Pdbc.Shopping.IntegrationTests.Api.Health.LifelineCheck
     {
         protected override IIntegrationTest CreateIntegrationTest()
         {
-            var service = ServiceProvider.GetService<IHealthCheckWebApiService>();
+            var service = ServiceProvider.GetService<IHealthWebApiService>();
             return new LifelineCheckTest(service, base.Context);
         }
     }

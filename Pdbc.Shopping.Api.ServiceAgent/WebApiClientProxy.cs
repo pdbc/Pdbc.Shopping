@@ -12,7 +12,6 @@ namespace Pdbc.Shopping.Api.ServiceAgent
     /// </summary>
     public class WebApiClientProxy
     {
-        private readonly Uri _baseAddress;
         private readonly string _name;
         private readonly IHttpClientFactory _httpClientFactory;
 
@@ -25,20 +24,12 @@ namespace Pdbc.Shopping.Api.ServiceAgent
         /// <summary>
         /// Default constructor
         /// </summary>
-        public WebApiClientProxy(IHttpClientFactory factory, String name, int timeoutInMinutes = 5)
+        public WebApiClientProxy(IHttpClientFactory factory, String name, int timeoutInMilliseconds = 5 * 1000)
         {
             _httpClientFactory = factory;
             _name = name;
-            ClientTimeout = TimeSpan.FromMinutes(timeoutInMinutes);
+            ClientTimeout = TimeSpan.FromMilliseconds(timeoutInMilliseconds);
         }
-
-        /// <summary>
-        /// The default message handler to use for the HttpClient
-        /// </summary>
-        //protected virtual HttpClientHandler GetHttpClientHandler()
-        //{
-        //    return new HttpClientHandler { UseDefaultCredentials = true };
-        //}
 
         /// <summary>
         /// The HttpClient responsible for sending/receiving HTTP requests and responses.
@@ -54,7 +45,6 @@ namespace Pdbc.Shopping.Api.ServiceAgent
             //client.T
 
             return client;
-            //return _client ?? (_client = new HttpClient(GetHttpClientHandler()) { Timeout = ClientTimeout, BaseAddress = _baseAddress });
         }
 
         /// <summary>
@@ -82,6 +72,7 @@ namespace Pdbc.Shopping.Api.ServiceAgent
         /// </summary>
         public virtual Task<TResponse> CallAsync<TResponse>(Func<HttpClient, Task<TResponse>> httpClientCall)
         {
+            
             return httpClientCall(GetHttpClient());
         }
 

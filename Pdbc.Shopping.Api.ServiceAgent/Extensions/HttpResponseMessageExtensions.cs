@@ -19,16 +19,16 @@ namespace Pdbc.Shopping.Api.ServiceAgent.Extensions
         {
             try
             {
-                var r = await response.Content.ReadAsStringAsync();
-                var r2 = JsonConvert.DeserializeObject<TResponse>(r);
-                return r2;
-
-                //var r2 = JsonSerializer.Deserialize<TResponse>(r);
-                ////return r2;
-
-                //await using var responseStream = await response.Content.ReadAsStreamAsync();
-                //var result = await JsonSerializer.DeserializeAsync<TResponse>(responseStream);
-                //return result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var r = await response.Content.ReadAsStringAsync();
+                    var r2 = JsonConvert.DeserializeObject<TResponse>(r);
+                    return r2;
+                }
+                else
+                {
+                    return await response.HandleRequestCannotDeserialize<TResponse>().ConfigureAwait(false);
+                }
 
             }
             catch (Exception ex)
@@ -61,6 +61,7 @@ namespace Pdbc.Shopping.Api.ServiceAgent.Extensions
             var r = await response.Content.ReadAsStringAsync()
                 .ConfigureAwait(false);
 
+            // todo add extra 
             throw new ServiceAgentException();
             //var requestUri = response.RequestMessage.RequestUri;
             //var requestMethod = response.RequestMessage.Method;

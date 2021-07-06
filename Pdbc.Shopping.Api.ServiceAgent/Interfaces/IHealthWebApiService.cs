@@ -2,7 +2,7 @@
 
 namespace Pdbc.Shopping.Api.ServiceAgent.Interfaces
 {
-    public interface IHealthCheckWebApiService : IHealthCheckService
+    public interface IHealthWebApiService : IHealthCheckService
     {
     }
 }

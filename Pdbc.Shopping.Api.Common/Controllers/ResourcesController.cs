@@ -29,7 +29,7 @@ namespace Pdbc.Shopping.Api.Common.Controllers
         /// </summary>
         /// <param name="request">The Request.</param>
         /// <returns>Returns a dictionary with all possible error keys and translations in the chosen language</returns>
-        [HttpGet("{Language}")]
+        [HttpGet("errors/{Language}")]
         [ProducesResponseType(typeof(ListErrorMessagesResponse), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<ListErrorMessagesResponse>> ListErrorMessages([FromRoute] ListErrorMessagesRequest request)
         {
@@ -42,7 +42,7 @@ namespace Pdbc.Shopping.Api.Common.Controllers
         /// </summary>
         /// <param name="request">The messageRequest.</param>
         /// <returns>Returns the translated full text of the error code if found or null.</returns>
-        [HttpGet("{Language}/{Key}")]
+        [HttpGet("errors/{Language}/{Key}")]
         [ProducesResponseType(typeof(GetErrorMessageResponse), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<GetErrorMessageResponse>> GetErrorMessage([FromRoute] GetErrorMessageRequest request)
         {

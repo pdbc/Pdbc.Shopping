@@ -1,7 +1,9 @@
 ﻿using Pdbc.Shopping.Api.Contracts.Requests.Errors;
 using Pdbc.Shopping.Api.Contracts.Services;
 using Pdbc.Shopping.Data;
+using Pdbc.Shopping.I18N;
 using Pdbc.Shopping.Integration.Tests.ErrorMessages;
+using Pdbc.Shopping.Tests.Helpers.Api.Validation;
 using Pdbc.Shopping.Tests.Helpers.Extensions;
 
 namespace Pdbc.Shopping.Integration.Tests.Errors.Get
@@ -39,6 +41,7 @@ namespace Pdbc.Shopping.Integration.Tests.Errors.Get
         {
             response.Message.ShouldBeNull();
             response.Notifications.HasErrors().ShouldBeTrue();
+            response.Notifications.ExpectErrorWithCode(nameof(ErrorResources.LanguageIsEmpty));
         }
     }
 }

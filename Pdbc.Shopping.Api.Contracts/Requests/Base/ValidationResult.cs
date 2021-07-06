@@ -11,6 +11,20 @@ namespace Pdbc.Shopping.Api.Contracts.Requests
         /// <summary>
         /// Initializes a new instance of the <see cref="ValidationResult"/> class.
         /// </summary>
+        public ValidationResult(params string[] errorCodes)
+        {
+            var messages = new List<ValidationResultMessage>();
+            foreach (var code in errorCodes)
+            {
+                messages.Add(new ValidationResultMessage() { Key = code});
+            }
+
+            Messages = messages;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ValidationResult"/> class.
+        /// </summary>
         public ValidationResult()
         {
             Messages = new List<ValidationResultMessage>();
