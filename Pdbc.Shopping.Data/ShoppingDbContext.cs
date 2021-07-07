@@ -67,6 +67,7 @@ namespace Pdbc.Shopping.Data
             try
             {
                 ValidateEntities();
+
                 HandleCreatableEntities();
                 HandleModifiableEntities();
 
