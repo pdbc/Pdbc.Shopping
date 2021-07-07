@@ -61,6 +61,15 @@ namespace Pdbc.Shopping.I18N {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Audit properties cannot be resolved.  Have you provided an AuditResolver?.
+        /// </summary>
+        public static string AuditPropertiesCannotBeResolved {
+            get {
+                return ResourceManager.GetString("AuditPropertiesCannotBeResolved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Language is empty and is required.
         /// </summary>
         public static string LanguageIsEmpty {

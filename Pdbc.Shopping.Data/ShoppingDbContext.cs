@@ -1,16 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Logging;
 using Pdbc.Shopping.Data;
 using Pdbc.Shopping.Data.Configurations;
 using Pdbc.Shopping.Data.Interceptors;
 using Pdbc.Shopping.Common;
+using Pdbc.Shopping.Data.Auditing;
 using Pdbc.Shopping.Data.Exceptions;
 using Pdbc.Shopping.Domain.Model;
+using Pdbc.Shopping.I18N;
 
 namespace Pdbc.Shopping.Data
 {
@@ -22,7 +26,7 @@ namespace Pdbc.Shopping.Data
         {
         }
 
-        public ShoppingDbContext(DbContextOptions<ShoppingDbContext> options, 
+        public ShoppingDbContext(DbContextOptions<ShoppingDbContext> options,
             ILogger<ShoppingDbContext> logger) : base(options)
         {
             _logger = logger;
@@ -64,13 +68,21 @@ namespace Pdbc.Shopping.Data
 
         public override int SaveChanges()
         {
+            ValidateEntities();
+
+            HandleCreatableEntities();
+            HandleModifiableEntities();
+
+            // AuditRecords (lifecycle)
+            var auditRecordCreationInfoItems = GetAuditRecordsCreationInfoItems();
+
             try
             {
-                ValidateEntities();
-                HandleCreatableEntities();
-                HandleModifiableEntities();
+                var numberOfChanges = base.SaveChanges();
 
-                return base.SaveChanges();
+                SaveAuditRecords(auditRecordCreationInfoItems);
+
+                return numberOfChanges;
             }
             catch (InvalidOperationException invalidOperationException)
             {
@@ -100,8 +112,38 @@ namespace Pdbc.Shopping.Data
 
         }
 
-        #region Private Helpers
+       
 
+        #region Generic Exceptions
+        private void ThrowErrorWhenDependentObjectStillUsedException(Exception ex)
+        {
+            if (ex.Message.Contains("When a change is made to a relationship, the related foreign-key property is set to a null value."))
+            {
+                throw new DependentObjectStillUsedException(ex);
+            }
+
+            if (ex.InnerException != null)
+            {
+                ThrowErrorWhenDependentObjectStillUsedException(ex.InnerException);
+            }
+        }
+
+        private void ThrowErrorWhenUniqueIndexViolated(Exception ex)
+        {
+            //duplicate key row in object 'dbo.Profile' with unique index
+            if (ex.Message.Contains("duplicate key") && ex.Message.Contains("unique index"))
+            {
+                throw new UniqueKeyViolationException(ex.Message, ex);
+            }
+
+            if (ex.InnerException != null)
+            {
+                ThrowErrorWhenUniqueIndexViolated(ex.InnerException);
+            }
+        }
+        #endregion
+
+        #region Validation
         private void ValidateEntities()
         {
             var entities = ChangeTracker.Entries().
@@ -114,6 +156,10 @@ namespace Pdbc.Shopping.Data
                 Validator.ValidateObject(entity, validationContext);
             }
         }
+
+        #endregion
+
+        #region Auditing - Easy
 
         private void HandleCreatableEntities()
         {
@@ -155,39 +201,135 @@ namespace Pdbc.Shopping.Data
             }
         }
 
+        #endregion
+
+        #region Helper methods
         private string GetExecutingUserName()
         {
             return UserContext.GetUsername();
         }
+        #endregion
 
-        private void ThrowErrorWhenDependentObjectStillUsedException(Exception ex)
+        #region Auditing - Full
+
+        private List<AuditRecordCreationInfo> GetAuditRecordsCreationInfoItems()
         {
-            if (ex.Message.Contains("When a change is made to a relationship, the related foreign-key property is set to a null value."))
+            var result = new List<AuditRecordCreationInfo>();
+            foreach (EntityEntry<IEntity> entry in ChangeTracker.Entries<IEntity>().Where(e => e.State == EntityState.Added))
             {
-                throw new DependentObjectStillUsedException(ex);
+                result.AddRange(BuildAuditRecordCreationInfo(entry, EntityActionEnum.Added));
             }
 
-            if (ex.InnerException != null)
+            foreach (var entry in ChangeTracker.Entries<IEntity>().Where(e => e.State == EntityState.Modified))
             {
-                ThrowErrorWhenDependentObjectStillUsedException(ex.InnerException);
+                result.AddRange(BuildAuditRecordCreationInfo(entry, EntityActionEnum.Modified));
             }
+
+            foreach (var entry in ChangeTracker.Entries<IEntity>().Where(e => e.State == EntityState.Deleted))
+            {
+                result.AddRange(BuildAuditRecordCreationInfo(entry, EntityActionEnum.Deleted));
+            }
+
+            return result;
         }
 
-        private void ThrowErrorWhenUniqueIndexViolated(Exception ex)
+        private IList<AuditRecordCreationInfo> BuildAuditRecordCreationInfo(EntityEntry<IEntity> entry, EntityActionEnum action)
         {
-            //duplicate key row in object 'dbo.Profile' with unique index
-            if (ex.Message.Contains("duplicate key") && ex.Message.Contains("unique index"))
+            var result = new List<AuditRecordCreationInfo>();
+            //if (_auditRecordLoggerService == null)
+            //{
+            //    return result;
+            //}
+
+            if (entry.Entity is IRequireAuditing requireAuditing)
             {
-                throw new UniqueKeyViolationException(ex.Message, ex);
+                var tempAuditInfo = new AuditRecordCreationInfo
+                {
+                    Action = action,
+                    Entity = requireAuditing,
+                    Entry = entry,
+                    PropertyChanges = BuildPropertyChangesItems(entry, action)
+                };
+
+
+                result.Add(tempAuditInfo);
             }
 
-            if (ex.InnerException != null)
-            {
-                ThrowErrorWhenUniqueIndexViolated(ex.InnerException);
-            }
+            return result;
         }
 
-        #endregion //Private Helpers
+        private List<PropertyChangesDataInfo> BuildPropertyChangesItems(EntityEntry<IEntity> entry, EntityActionEnum action)
+        {
+            var result = new List<PropertyChangesDataInfo>();
+            //if (_auditRecordLoggerService == null)
+            //{
+            //    return result;
+            //}
+
+            // No property changes for deletions
+            if (action == EntityActionEnum.Deleted)
+                return result;
+
+
+            if (entry.Entity is IRequireAuditing requireAuditing)
+            {
+                foreach (var prop in entry.CurrentValues.Properties)
+                {
+                    if (requireAuditing.ShouldAuditPropertyChangeFor(prop.Name))
+                    {
+                        var originalValue = "";
+                        if (action != EntityActionEnum.Added)
+                        {
+                            originalValue = entry.OriginalValues[prop]?.ToString();
+                        }
+
+                        var currentValue = entry.CurrentValues[prop]?.ToString();
+
+                        if (originalValue != currentValue) //Only create a log if the value changes
+                        {
+                            result.Add(new PropertyChangesDataInfo()
+                            {
+                                Property = prop.Name,
+                                PreviousValue = originalValue,
+                                NewValue = currentValue
+                            });
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        private void SaveAuditRecords(List<AuditRecordCreationInfo> records)
+        {
+            //if (_auditRecordLoggerService == null)
+            //{
+            //    return;
+            //}
+
+            records.ForEach(x =>
+            {
+                //_auditPropertiesResolver.LoadAuditProperties(x.Entity);
+
+                var auditProperties = x.Entity.GetAuditProperties();
+                if (auditProperties == null)
+                {
+                    throw new ArgumentException(nameof(ErrorResources.AuditPropertiesCannotBeResolved));
+                }
+                else
+                {
+                    // TODO Persist the audit record here depending on your needs, use a logging or telemetry  framework or store the records in your own/seperate database for business querying.
+
+                    //_auditRecordLoggerService.LogObjectLifecycleChange(auditProperties, x.Action, x.PropertyChanges)
+                    //    .GetAwaiter()
+                    //    .GetResult();
+                }
+            });
+
+        }
+
+        #endregion
 
 
     }
