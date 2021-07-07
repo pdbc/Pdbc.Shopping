@@ -48,6 +48,10 @@ Once we have project we need to retrieve specific classes from it:
 * GetCqrsClasses: Get the classes related to CQRS  (Query/Command/...)
 * GetApiContractClasses: Get classes related to API Contracts
 
+## AutoMapper
+
+The request pipeline starts with a Request which then gets translated (mapped) to Command/Query and gets executed.  After the execution a Result/ViewModel is returned which then gets mapped to Response.
+
 
 
 
