@@ -41,6 +41,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Pdbc.Shopping.Common\Pdbc.Shopping.Common.csproj" />
+    <ProjectReference Include="..\Pdbc.Shopping.Domain\Pdbc.Shopping.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
