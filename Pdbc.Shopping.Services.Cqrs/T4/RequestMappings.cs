@@ -33,7 +33,15 @@ public class RequestToCqrsMappings : Profile
 // ShoppingRequest ShoppingCommand
   
 // ShoppingRequest ShoppingCommand
+  
+// ShoppingRequest ShoppingCommand
+  
+// ShoppingRequest ShoppingCommand
           
+// ShoppingResponse ShoppingResult
+  
+// ShoppingResponse ShoppingResult
+  
 // ShoppingResponse ShoppingResult
   
 // ShoppingResponse ShoppingResult
@@ -51,8 +59,16 @@ public class RequestToCqrsMappings : Profile
 // ShoppingResponse ShoppingResult
           
 // DependencyCheckRequest DependencyCheckCommand
+  
+// DependencyCheckRequest DependencyCheckCommand
+  
+// DependencyCheckRequest DependencyCheckCommand
 CreateMap<Pdbc.Shopping.Api.Contracts.Requests.Health.DependencyCheckRequest, Pdbc.Shopping.Core.CQRS.Health.DependencyCheck.DependencyCheckCommand>();
           
+// DependencyCheckResponse DependencyCheckResult
+  
+// DependencyCheckResponse DependencyCheckResult
+  
 // DependencyCheckResponse DependencyCheckResult
   
 // DependencyCheckResponse DependencyCheckResult
@@ -63,8 +79,16 @@ CreateMap<Pdbc.Shopping.Core.CQRS.Health.DependencyCheck.DependencyCheckResult, 
 // LifelineCheckRequest LifelineCheckCommand
   
 // LifelineCheckRequest LifelineCheckCommand
+  
+// LifelineCheckRequest LifelineCheckCommand
+  
+// LifelineCheckRequest LifelineCheckCommand
 CreateMap<Pdbc.Shopping.Api.Contracts.Requests.Health.LifelineCheckRequest, Pdbc.Shopping.Core.CQRS.Health.LifelineCheck.LifelineCheckCommand>();
           
+// LifelineCheckResponse LifelineCheckResult
+  
+// LifelineCheckResponse LifelineCheckResult
+  
 // LifelineCheckResponse LifelineCheckResult
   
 // LifelineCheckResponse LifelineCheckResult
@@ -83,8 +107,16 @@ CreateMap<Pdbc.Shopping.Core.CQRS.Health.LifelineCheck.LifelineCheckResult, Pdbc
 // GetErrorMessageRequest GetErrorMessageQuery
   
 // GetErrorMessageRequest GetErrorMessageQuery
+  
+// GetErrorMessageRequest GetErrorMessageQuery
+  
+// GetErrorMessageRequest GetErrorMessageQuery
 CreateMap<Pdbc.Shopping.Api.Contracts.Requests.Errors.GetErrorMessageRequest, Pdbc.Shopping.Core.CQRS.Resources.Errors.Get.GetErrorMessageQuery>();
           
+// GetErrorMessageResponse GetErrorMessageViewModel
+  
+// GetErrorMessageResponse GetErrorMessageViewModel
+  
 // GetErrorMessageResponse GetErrorMessageViewModel
   
 // GetErrorMessageResponse GetErrorMessageViewModel
@@ -111,8 +143,16 @@ CreateMap<Pdbc.Shopping.Core.CQRS.Resources.Errors.Get.GetErrorMessageViewModel,
 // ListErrorMessagesRequest ListErrorMessagesQuery
   
 // ListErrorMessagesRequest ListErrorMessagesQuery
+  
+// ListErrorMessagesRequest ListErrorMessagesQuery
+  
+// ListErrorMessagesRequest ListErrorMessagesQuery
 CreateMap<Pdbc.Shopping.Api.Contracts.Requests.Resources.Errors.ListErrorMessagesRequest, Pdbc.Shopping.Core.CQRS.Resources.Errors.List.ListErrorMessagesQuery>();
           
+// ListErrorMessagesResponse ListErrorMessagesViewModel
+  
+// ListErrorMessagesResponse ListErrorMessagesViewModel
+  
 // ListErrorMessagesResponse ListErrorMessagesViewModel
   
 // ListErrorMessagesResponse ListErrorMessagesViewModel

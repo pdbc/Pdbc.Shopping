@@ -21,6 +21,9 @@
     var project = GetCurrentProject();
     var projectName = project.FullName;
     var classes = GetCqrsClasses(project); 
+
+	classes.AddRange(GetDtoClasses(GetProjectByName("Pdbc.Shopping.DTO")));
+
 #>
 using System;
 using System.Linq;

@@ -1,8 +1,6 @@
 ﻿using System.Threading;
 using NUnit.Framework;
-using Pdbc.Music.Core.CQRS.ErrorMessages.Get;
 using Pdbc.Shopping.Core.CQRS.Health.LifelineCheck;
-using Pdbc.Shopping.Core.CQRS.Resources.ErrorMessages.Get;
 using Pdbc.Shopping.Tests.Helpers;
 using Pdbc.Shopping.Tests.Helpers.Core.CQRS.Health;
 using Pdbc.Shopping.Tests.Helpers.Core.CQRS.Resources.ErrorMessages;
@@ -22,7 +20,7 @@ namespace Pdbc.Shopping.UnitTests.Core.CQRS.Health.LifelineCheck
             base.Establish_context();
             _cancelationToken = new CancellationToken();
 
-            Command = new LifelineCheckQueryTestDataBuilder().Build();
+            Command = new LifelineCheckCommandTestDataBuilder().Build();
         }
 
         protected override void Because()

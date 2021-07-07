@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using Pdbc.Shopping.Core.CQRS.Resources.ErrorMessages.List;
 using Pdbc.Shopping.Core.CQRS.Resources.Errors.List;
 using Pdbc.Shopping.Tests.Helpers;
 using Pdbc.Shopping.Tests.Helpers.Core.CQRS.Resources.ErrorMessages;

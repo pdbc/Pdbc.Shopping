@@ -1,6 +1,4 @@
-﻿using Pdbc.Shopping.Core.CQRS.Resources.ErrorMessages.List;
-
-namespace Pdbc.Shopping.Core.CQRS.Resources.Errors.List
+﻿namespace Pdbc.Shopping.Core.CQRS.Resources.Errors.List
 {
     public class ListErrorMessagesQuery : IQuery<ListErrorMessagesViewModel>
     {

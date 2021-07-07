@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Pdbc.Shopping.Common.Validation;
-using Pdbc.Shopping.Core.CQRS.Resources.ErrorMessages.Get;
 using Pdbc.Shopping.Core.CQRS.Resources.Errors.Get;
 using Pdbc.Shopping.Core.Validation.Extensions;
 using Pdbc.Shopping.I18N;

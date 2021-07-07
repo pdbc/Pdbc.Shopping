@@ -7,9 +7,9 @@ using Pdbc.Shopping.Core.CQRS.Health.LifelineCheck;
 
 namespace Pdbc.Shopping.Tests.Helpers.Core.CQRS.Health
 {
-    public class LifelineCheckQueryTestDataBuilder : LifelineCheckQueryBuilder
+    public class LifelineCheckCommandTestDataBuilder : LifelineCheckCommandBuilder
     {
-        public LifelineCheckQueryTestDataBuilder()
+        public LifelineCheckCommandTestDataBuilder()
         {
             
         }

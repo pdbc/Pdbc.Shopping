@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using MediatR;
 using Pdbc.Shopping.Common.Extensions;
-using Pdbc.Shopping.Core.CQRS.Resources.ErrorMessages.List;
 using Pdbc.Shopping.I18N;
 
 namespace Pdbc.Shopping.Core.CQRS.Resources.Errors.List

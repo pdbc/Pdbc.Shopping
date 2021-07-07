@@ -1,4 +1,4 @@
-﻿using Pdbc.Shopping.Core.CQRS.Resources.ErrorMessages.List;
+﻿using Pdbc.Shopping.Core.CQRS.Resources.Errors.List;
 
 namespace Pdbc.Shopping.Tests.Helpers.Core.CQRS.Resources.ErrorMessages
 {

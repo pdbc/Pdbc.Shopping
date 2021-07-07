@@ -80,6 +80,20 @@
 				).ToList();	
     }
 
+        // Gets all the CQRS classes from the project (convention = Command,Query,Info)
+    public List<EnvDTE.CodeClass> GetDtoClasses(EnvDTE.Project project) {
+        return GetClassesOf(project).Where(c => 
+				// Specify the name prefixes
+				(
+                    c.Name.EndsWith("Dto")
+
+                )  &&
+                
+                // Ignore all the Builder classes
+				!c.Name.EndsWith("Builder")
+				).ToList();	
+    }
+
     // Gets all the request objects from the project (Convention = Request)
     public List<EnvDTE.CodeClass> GetApiContractClasses(EnvDTE.Project project) {
         return GetClassesOf(project).Where(c => 

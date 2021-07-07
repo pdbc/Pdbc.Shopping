@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using Pdbc.Shopping.Core.CQRS.Resources.ErrorMessages.List;
 using Pdbc.Shopping.Core.Validation;
 using Pdbc.Shopping.I18N;
 

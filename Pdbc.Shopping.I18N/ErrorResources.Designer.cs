@@ -61,6 +61,15 @@ namespace Pdbc.Shopping.I18N {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The name is required when creating an article..
+        /// </summary>
+        public static string ArticleNameIsRequired {
+            get {
+                return ResourceManager.GetString("ArticleNameIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Audit properties cannot be resolved.  Have you provided an AuditResolver?.
         /// </summary>
         public static string AuditPropertiesCannotBeResolved {
