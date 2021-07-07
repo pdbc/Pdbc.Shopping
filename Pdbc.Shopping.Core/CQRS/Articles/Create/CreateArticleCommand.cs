@@ -1,9 +1,9 @@
-﻿using IdentityStore.Core.CQRS.Application.Create;
+﻿using Pdbc.Shopping.DTO.Articles;
 
 namespace Pdbc.Shopping.Core.CQRS.Articles.Create
 {
     public class CreateArticleCommand : ICommand<CreateArticleResult> 
     {
-        public ICreateApplication Application { get; set; }
+        public IArticleCreateDto Article { get; set; }
     }
 }

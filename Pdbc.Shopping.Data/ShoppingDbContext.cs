@@ -212,30 +212,30 @@ namespace Pdbc.Shopping.Data
 
         #region Auditing - Full
 
-        private List<AuditRecordCreationInfo> GetAuditRecordsCreationInfoItems()
+        private List<AuditRecordCreationDataInfo> GetAuditRecordsCreationInfoItems()
         {
-            var result = new List<AuditRecordCreationInfo>();
+            var result = new List<AuditRecordCreationDataInfo>();
             foreach (EntityEntry<IEntity> entry in ChangeTracker.Entries<IEntity>().Where(e => e.State == EntityState.Added))
             {
-                result.AddRange(BuildAuditRecordCreationInfo(entry, EntityActionEnum.Added));
+                result.AddRange(BuildAuditRecordCreationInfo(entry, AuditEntityActionEnum.Added));
             }
 
             foreach (var entry in ChangeTracker.Entries<IEntity>().Where(e => e.State == EntityState.Modified))
             {
-                result.AddRange(BuildAuditRecordCreationInfo(entry, EntityActionEnum.Modified));
+                result.AddRange(BuildAuditRecordCreationInfo(entry, AuditEntityActionEnum.Modified));
             }
 
             foreach (var entry in ChangeTracker.Entries<IEntity>().Where(e => e.State == EntityState.Deleted))
             {
-                result.AddRange(BuildAuditRecordCreationInfo(entry, EntityActionEnum.Deleted));
+                result.AddRange(BuildAuditRecordCreationInfo(entry, AuditEntityActionEnum.Deleted));
             }
 
             return result;
         }
 
-        private IList<AuditRecordCreationInfo> BuildAuditRecordCreationInfo(EntityEntry<IEntity> entry, EntityActionEnum action)
+        private IList<AuditRecordCreationDataInfo> BuildAuditRecordCreationInfo(EntityEntry<IEntity> entry, AuditEntityActionEnum action)
         {
-            var result = new List<AuditRecordCreationInfo>();
+            var result = new List<AuditRecordCreationDataInfo>();
             //if (_auditRecordLoggerService == null)
             //{
             //    return result;
@@ -243,7 +243,7 @@ namespace Pdbc.Shopping.Data
 
             if (entry.Entity is IRequireAuditing requireAuditing)
             {
-                var tempAuditInfo = new AuditRecordCreationInfo
+                var tempAuditInfo = new AuditRecordCreationDataInfo
                 {
                     Action = action,
                     Entity = requireAuditing,
@@ -258,7 +258,7 @@ namespace Pdbc.Shopping.Data
             return result;
         }
 
-        private List<PropertyChangesDataInfo> BuildPropertyChangesItems(EntityEntry<IEntity> entry, EntityActionEnum action)
+        private List<PropertyChangesDataInfo> BuildPropertyChangesItems(EntityEntry<IEntity> entry, AuditEntityActionEnum action)
         {
             var result = new List<PropertyChangesDataInfo>();
             //if (_auditRecordLoggerService == null)
@@ -267,7 +267,7 @@ namespace Pdbc.Shopping.Data
             //}
 
             // No property changes for deletions
-            if (action == EntityActionEnum.Deleted)
+            if (action == AuditEntityActionEnum.Deleted)
                 return result;
 
 
@@ -278,7 +278,7 @@ namespace Pdbc.Shopping.Data
                     if (requireAuditing.ShouldAuditPropertyChangeFor(prop.Name))
                     {
                         var originalValue = "";
-                        if (action != EntityActionEnum.Added)
+                        if (action != AuditEntityActionEnum.Added)
                         {
                             originalValue = entry.OriginalValues[prop]?.ToString();
                         }
@@ -301,7 +301,7 @@ namespace Pdbc.Shopping.Data
             return result;
         }
 
-        private void SaveAuditRecords(List<AuditRecordCreationInfo> records)
+        private void SaveAuditRecords(List<AuditRecordCreationDataInfo> records)
         {
             //if (_auditRecordLoggerService == null)
             //{

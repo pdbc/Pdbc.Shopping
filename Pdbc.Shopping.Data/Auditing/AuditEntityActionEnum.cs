@@ -1,6 +1,6 @@
 ﻿namespace Pdbc.Shopping.Data.Auditing
 {
-    public enum EntityActionEnum
+    public enum AuditEntityActionEnum
     {
         Added = 1,
         Modified = 2,

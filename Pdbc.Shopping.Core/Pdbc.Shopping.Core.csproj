@@ -23,6 +23,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="CQRS\Articles\Create\CreateArticleCommandHandler.cs" />
+    <Compile Include="CQRS\Articles\Create\CreateArticleCommandValidator.cs" />
+    <Compile Include="CQRS\Articles\Create\CreateArticleCommandFactory.cs" />
+    <Compile Include="CQRS\Articles\Create\CreateArticleResult.cs" />
+    <Compile Include="CQRS\Articles\Create\CreateArticleCommand.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="CQRS\T4\CqrsClassesBuilders.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -41,7 +49,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Pdbc.Shopping.Common\Pdbc.Shopping.Common.csproj" />
+    <ProjectReference Include="..\Pdbc.Shopping.Data\Pdbc.Shopping.Data.csproj" />
     <ProjectReference Include="..\Pdbc.Shopping.Domain\Pdbc.Shopping.Domain.csproj" />
+    <ProjectReference Include="..\Pdbc.Shopping.DTO\Pdbc.Shopping.DTO.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -61,10 +71,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>CqrsClassesBuilders.tt</DependentUpon>
     </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="CQRS\Articles\" />
   </ItemGroup>
 
 </Project>

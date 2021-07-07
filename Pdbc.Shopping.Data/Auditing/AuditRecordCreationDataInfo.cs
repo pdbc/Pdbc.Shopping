@@ -4,16 +4,16 @@ using Pdbc.Shopping.Domain.Model;
 
 namespace Pdbc.Shopping.Data.Auditing
 {
-    public class AuditRecordCreationInfo
+    public class AuditRecordCreationDataInfo
     {
-        public AuditRecordCreationInfo()
+        public AuditRecordCreationDataInfo()
         {
             PropertyChanges = new List<PropertyChangesDataInfo>();
         }
 
         public IRequireAuditing Entity { get; set; }
 
-        public EntityActionEnum Action { get; set; }
+        public AuditEntityActionEnum Action { get; set; }
 
 
         public List<PropertyChangesDataInfo> PropertyChanges { get; set; }
