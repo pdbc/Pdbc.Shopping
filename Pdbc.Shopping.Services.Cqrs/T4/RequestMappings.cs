@@ -18,6 +18,14 @@ public class RequestToCqrsMappings : Profile
         AddGlobalIgnore("Notifications");
 
           
+// CreateArticleRequest CreateArticleCommand
+CreateMap<Pdbc.Shopping.Api.Contracts.Requests.Articles.CreateArticleRequest, Pdbc.Shopping.Core.CQRS.Articles.Create.CreateArticleCommand>();
+          
+// CreateArticleResponse CreateArticleResult
+  
+// CreateArticleResponse CreateArticleResult
+CreateMap<Pdbc.Shopping.Core.CQRS.Articles.Create.CreateArticleResult, Pdbc.Shopping.Api.Contracts.Requests.Articles.CreateArticleResponse>();
+          
 // ShoppingRequest ShoppingCommand
   
 // ShoppingRequest ShoppingCommand

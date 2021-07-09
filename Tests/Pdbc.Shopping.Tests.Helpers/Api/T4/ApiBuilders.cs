@@ -10,6 +10,54 @@ using System;
 using System.Linq;
 
 using Pdbc.Shopping.Common;
+namespace Pdbc.Shopping.Api.Contracts.Requests.Articles {
+    public partial class CreateArticleRequestBuilder : ObjectBuilder<Pdbc.Shopping.Api.Contracts.Requests.Articles.CreateArticleRequest>
+	{
+       protected Pdbc.Shopping.DTO.Articles.ArticleCreateDto Article { get; set; }		
+public CreateArticleRequestBuilder WithArticle(Pdbc.Shopping.DTO.Articles.ArticleCreateDto article)
+{
+    this.Article = article;
+	return this;
+}	
+
+       
+public override CreateArticleRequest Build()
+{
+    var item = (CreateArticleRequest)Activator.CreateInstance(typeof(CreateArticleRequest));
+    	
+		
+	item.Article = Article;
+	    
+    return item;
+}
+      
+    }
+}
+
+namespace Pdbc.Shopping.Api.Contracts.Requests.Articles {
+    public partial class CreateArticleResponseBuilder : ObjectBuilder<Pdbc.Shopping.Api.Contracts.Requests.Articles.CreateArticleResponse>
+	{
+       protected Pdbc.Shopping.Api.Contracts.Requests.ValidationResult Notifications { get; set; }		
+public CreateArticleResponseBuilder WithNotifications(Pdbc.Shopping.Api.Contracts.Requests.ValidationResult notifications)
+{
+    this.Notifications = notifications;
+	return this;
+}	
+
+       
+public override CreateArticleResponse Build()
+{
+    var item = (CreateArticleResponse)Activator.CreateInstance(typeof(CreateArticleResponse));
+    	
+		
+	item.Notifications = Notifications;
+	    
+    return item;
+}
+      
+    }
+}
+
 namespace Pdbc.Shopping.Api.Contracts.Requests {
     public partial class ShoppingRequestBuilder : ObjectBuilder<Pdbc.Shopping.Api.Contracts.Requests.ShoppingRequest>
 	{

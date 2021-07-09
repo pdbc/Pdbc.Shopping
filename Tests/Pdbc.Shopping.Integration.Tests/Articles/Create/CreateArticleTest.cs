@@ -1,6 +1,7 @@
 ﻿using Pdbc.Shopping.Api.Contracts.Requests.Articles;
 using Pdbc.Shopping.Api.Contracts.Services;
 using Pdbc.Shopping.Data;
+using Pdbc.Shopping.Tests.Helpers.Api.Articles;
 using Pdbc.Shopping.Tests.Helpers.Api.Validation;
 
 namespace Pdbc.Shopping.Integration.Tests.Articles.Create
@@ -16,10 +17,7 @@ namespace Pdbc.Shopping.Integration.Tests.Articles.Create
 
         public override void Setup()
         {
-            _request = new CreateArticleRequest()
-            {
-                
-            };
+            _request = new CreateArticleRequestTestDataBuilder();
         }
 
         public override void Cleanup()

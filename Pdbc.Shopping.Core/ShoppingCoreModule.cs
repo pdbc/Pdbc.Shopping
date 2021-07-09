@@ -20,9 +20,21 @@ namespace Pdbc.Shopping.Core
 
             serviceCollection.AddScoped<ValidationBag>();
 
-            //// Scan register 
+            // Scan register all validators
             serviceCollection.Scan(scan => scan.FromAssemblyOf<ShoppingCoreModule>()
                 .AddClasses(classes => classes.AssignableTo(typeof(IValidator<>)).Where(_ => !_.IsGenericType))  // Get all classes implementing the IValidator<T>
+                .AsImplementedInterfaces()
+                .WithScopedLifetime()
+            );
+
+            serviceCollection.Scan(scan => scan.FromAssemblyOf<ShoppingCoreModule>()
+                .AddClasses(classes => classes.AssignableTo(typeof(IFactory<,>)).Where(_ => !_.IsGenericType))  // Get all classes implementing the IValidator<T>
+                .AsImplementedInterfaces()
+                .WithScopedLifetime()
+            );
+
+            serviceCollection.Scan(scan => scan.FromAssemblyOf<ShoppingCoreModule>()
+                .AddClasses(classes => classes.AssignableTo(typeof(IChangesHandler<,>)).Where(_ => !_.IsGenericType))  // Get all classes implementing the IValidator<T>
                 .AsImplementedInterfaces()
                 .WithScopedLifetime()
             );
