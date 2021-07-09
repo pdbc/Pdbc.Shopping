@@ -21,10 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Api\Resources\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="Api\T4\ApiBuilders.cs">
       <DependentUpon>ApiBuilders.tt</DependentUpon>
       <DesignTime>True</DesignTime>

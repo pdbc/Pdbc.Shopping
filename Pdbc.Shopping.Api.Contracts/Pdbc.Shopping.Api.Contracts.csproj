@@ -10,4 +10,8 @@
     <None Remove="Dto\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Pdbc.Shopping.DTO\Pdbc.Shopping.DTO.csproj" />
+  </ItemGroup>
+
 </Project>

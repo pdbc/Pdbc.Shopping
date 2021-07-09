@@ -2,9 +2,9 @@
 using Pdbc.Shopping.Api.Contracts.Services;
 using Pdbc.Shopping.Data;
 
-namespace Pdbc.Shopping.Integration.Tests.ErrorMessages
+namespace Pdbc.Shopping.Integration.Tests.Errors
 {
-    public abstract class ErrorMessageServiceTest<Result> : IntegrationTest<Result> where Result : ShoppingResponse
+    public abstract class ErrorMessageServiceTest<TResult> : IntegrationTest<TResult> where TResult : ShoppingResponse
     {
         protected IErrorMessagesService Service;
 

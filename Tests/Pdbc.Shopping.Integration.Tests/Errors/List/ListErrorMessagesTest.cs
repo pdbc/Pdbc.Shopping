@@ -1,7 +1,7 @@
 ﻿using Pdbc.Shopping.Api.Contracts.Requests.Resources.Errors;
 using Pdbc.Shopping.Api.Contracts.Services;
 using Pdbc.Shopping.Data;
-using Pdbc.Shopping.Integration.Tests.ErrorMessages;
+using Pdbc.Shopping.Tests.Helpers.Api.Resources;
 using Pdbc.Shopping.Tests.Helpers.Extensions;
 
 namespace Pdbc.Shopping.Integration.Tests.Errors.List
@@ -17,10 +17,7 @@ namespace Pdbc.Shopping.Integration.Tests.Errors.List
 
         public override void Setup()
         {
-            _request = new ListErrorMessagesRequest()
-            {
-                Language = "NL"
-            };
+            _request = new ListErrorMessagesRequestTestDataBuilder();
         }
 
         public override void Cleanup()
