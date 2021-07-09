@@ -61,6 +61,15 @@ namespace Pdbc.Shopping.I18N {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The article for creation is invalid..
+        /// </summary>
+        public static string ArticleForCreationInvalid {
+            get {
+                return ResourceManager.GetString("ArticleForCreationInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The name is required when creating an article..
         /// </summary>
         public static string ArticleNameIsRequired {

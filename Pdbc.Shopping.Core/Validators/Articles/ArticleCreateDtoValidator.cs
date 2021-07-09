@@ -18,6 +18,10 @@ namespace Pdbc.Shopping.Core.Validators.Articles
     {
         public ArticleCreateDtoValidator()
         {
+            RuleFor(i => i)
+                .NotNull()
+                .WithErrorCode(nameof(ErrorResources.ArticleForCreationInvalid));
+
             RuleFor(i => i.Name)
                 .NotEmpty()
                 .WithErrorCode(nameof(ErrorResources.ArticleNameIsRequired));

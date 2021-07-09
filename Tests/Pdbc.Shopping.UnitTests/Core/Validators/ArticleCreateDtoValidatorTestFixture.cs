@@ -14,13 +14,13 @@ namespace Pdbc.Shopping.UnitTests.Core.Validators
 {
     public class ArticleCreateDtoValidatorTestFixture : ContextSpecification<ArticleCreateDtoValidator>
     {
+
         [Test]
         public void Verify_no_error_code_given_when_object_fully_constructed()
         {
             var item = new ArticleCreateDtoTestDataBuilder().Build();
             SUT.ExpectNoValidationError(item);
         }
-
 
         [Test]
         public void Verify_error_code_given_when_name_is_empty()
