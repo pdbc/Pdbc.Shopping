@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
@@ -18,7 +19,7 @@ namespace Pdbc.Shopping.UnitTests.Core.CQRS.Articles.Create
     {
         private IArticleCreateDtoValidator ArticleCreateDtoValidator => Dependency<IArticleCreateDtoValidator>();
 
-        protected ValidationBag validationBag;
+        private ValidationBag _validationBag;
 
         private CreateArticleCommand _command;
 
@@ -26,20 +27,26 @@ namespace Pdbc.Shopping.UnitTests.Core.CQRS.Articles.Create
         {
             base.Establish_context();
 
-            validationBag = new ValidationBag();
+            _validationBag = new ValidationBag();
 
             _command = new CreateArticleCommandTestDataBuilder();
         }
 
         protected override void Because()
         {
-            SUT.Validate(_command, validationBag).GetAwaiter().GetResult();
+            SUT.Validate(_command, _validationBag).GetAwaiter().GetResult();
         }
 
-        [Test, Ignore("Expection set not correct")]
+        [Test, Ignore("Expection not working, How to set SetValidator expectation")]
         public void Verify()
         {
             ArticleCreateDtoValidator.AssertWasCalled(x => x.Validate(_command.Article), Times.Once());
+        }
+
+        [Test, Ignore("Expection not working, How to set SetValidator expectation")]
+        public void Verify_Async()
+        {
+            ArticleCreateDtoValidator.AssertWasCalled(x => x.ValidateAsync(_command.Article, It.IsAny<CancellationToken>()), Times.Once());
         }
     }
 
